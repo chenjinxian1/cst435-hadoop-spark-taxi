@@ -1,5 +1,15 @@
 \section{Results}\label{sec:results}
 
+\noindent\textbf{Main findings at a glance.}
+\begin{itemize}
+  \item \emph{Small data:} on one month the clusters are 4--6$\times$ slower than a
+        single Python process, because start-up costs 13--23\,s per job.
+  \item \emph{Large data:} on two years four workers are up to 4.0$\times$ faster than
+        one; Spark DataFrame is the fastest engine, up to 5.1$\times$ faster than serial.
+  \item \emph{Single host vs.\ cloud:} two Azure VMs scale more regularly than two
+        containers on one host, but each VM is slower.
+\end{itemize}
+
 \subsection{Method}
 For each cluster size $N\in\{1,2,3,4\}$ the cluster is rebuilt from scratch, a data
 tier is loaded into HDFS, and every combination of job and engine is run three times
@@ -21,7 +31,11 @@ three months of data (tiers W3, M, W9, L for $N=1..4$) and the efficiency is
 $T(1,\text{W3})/T(N,3N\text{ months})$.
 
 \subsection{Analytics output}
-\Cref{fig:analytics} shows the answers to the three questions for the full year 2024
+\Cref{fig:run} shows one real run: the \texttt{routes} job on tier L with four
+workers. Hadoop splits the 24 monthly blocks into 24 map tasks, 20 of them on the
+worker that stores the block; the combiner shrinks 39.7~million map outputs to
+\num{537298} records before the shuffle, and the job writes \num{50127} routes in
+60.8\,s. \Cref{fig:analytics} shows the answers to the three questions for the full year 2024
 (tier L, \num{39705145} valid trips). Demand peaks at 18:00 with 2.82~million trips
 over the year and is lowest at 04:00 (0.23~million); the busiest zone--hour pair is
 Midtown Center at 18:00 (\num{164630} pickups). The busiest zones differ in
@@ -31,6 +45,36 @@ midnight. The five most frequent routes all start and end in the Upper East Side
 Midtown, i.e.\ short trips inside Manhattan. Average fares grow with distance, while
 the credit-card tip rate falls from 28.8\% of the fare for trips under one mile to
 17.1\% for trips over 20~miles.
+
+\begin{figure}[t]
+\begin{lstlisting}[style=terminal]
+$ docker exec master /opt/scripts/run_job.sh mr routes L 4
+INFO mapreduce.JobSubmitter: number of splits:24
+INFO impl.YarnClientImpl: Submitted application
+     application_1795551341851_0087
+INFO mapreduce.Job:  map 0% reduce 0%
+INFO mapreduce.Job:  map 50% reduce 0%
+INFO mapreduce.Job:  map 100% reduce 45%
+INFO mapreduce.Job:  map 100% reduce 100%
+INFO mapreduce.Job: Job job_1795551341851_0087 completed
+     successfully
+  Launched map tasks=24       Data-local map tasks=20
+  Map input records=41169720
+  Map output records=39705145
+  Combine output records=537298
+  Reduce shuffle bytes=6656616
+  Reduce output records=50127
+SECONDS 60.84
+$ sort -k2 -nr outputs/mr-routes-L.tsv | head -3
+237|236    275994
+236|237    237909
+237|237    184456
+\end{lstlisting}
+\caption{A real run (abridged; timestamps removed): \texttt{routes} on tier L with
+four workers, Hadoop progress and job counters, the run time printed by
+\texttt{run\_job.sh}, and the three most frequent routes in the output
+(zone 237 = Upper East Side South, 236 = Upper East Side North).}\label{fig:run}
+\end{figure}
 
 \begin{figure*}[t]
 \centering

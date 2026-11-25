@@ -31,7 +31,7 @@ Every value is a numeric vector and the reducer only sums vectors element-wise, 
 - **Cloud vs. single host.** Each Azure vCPU is slower than the local machine, but two VMs scale more regularly than two containers on one host, because each VM has its own CPUs, disk and network interface.
 - **Correctness.** For every engine, data tier and cluster size, the output matches the serial baseline.
 
-The full analysis, figures and tables are in the report, `report/main.pdf` (build it as described below).
+The full analysis, figures and tables are in the report: [`report/main.pdf`](report/main.pdf).
 
 ## Repository layout
 

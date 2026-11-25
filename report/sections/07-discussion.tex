@@ -117,6 +117,18 @@ one host adds CPU quota, not independent hardware, and its speedup measurements 
 distorted by shared resources. The cloud cluster cost about US\$4 for all experiments;
 for the same money the local machine was faster, but it cannot grow beyond one host.
 
+\subsection{Lessons learned}
+(1)~\emph{Measure the fixed cost first.} One run on one month told us more about when
+a cluster pays off than any estimate: below about 1\,GB the start-up cost dominates.
+(2)~\emph{Containers are not machines.} Without caps one container used the whole host;
+even with caps they share a disk, and our measurements varied by 20\% between
+sessions, so multi-machine claims need real machines. (3)~\emph{Write the logic once,
+check every output.} One shared parser and an automatic output comparison made every
+speed comparison fair. (4)~\emph{Automate and make runs resumable.} The 10-hour sweep
+was interrupted several times; recording each run let us resume instead of restarting.
+(5)~\emph{Test an explanation before writing it.} Our first explanation of the
+two-worker anomaly, the page cache, was wrong.
+
 \subsection{Threats to validity}
 (i)~All local workers share one host, disk and memory bus (see above). (ii)~Only two
 cloud workers were possible within the student subscription's limit of six vCPUs per

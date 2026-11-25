@@ -1,0 +1,8 @@
+#cloud-config
+# Every VM: Docker from the Ubuntu archive, usable by the admin user.
+package_update: true
+packages:
+  - docker.io
+runcmd:
+  - usermod -aG docker azureuser
+  - systemctl enable --now docker

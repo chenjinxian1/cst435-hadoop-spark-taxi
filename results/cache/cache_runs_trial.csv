@@ -1,0 +1,5 @@
+timestamp,framework,job,tier,nodes,rep,mode,seconds,disk_read_mib,refault_mib,cache_peak_mib,anon_peak_mib,hdfs_mib_per_worker
+2026-11-25T11:48:50+08:00,spark_df,routes,S,1,1,cold,29.39,475,0,813,1587,470
+2026-11-25T11:49:18+08:00,spark_df,routes,S,1,1,warm,22.62,0,0,818,1512,470
+2026-11-25T11:56:03+08:00,mr,routes,L,1,1,cold,143.01,2013,0,2026,1526,2315
+2026-11-25T11:58:29+08:00,mr,routes,L,1,1,warm,141.88,0,0,2029,1591,2315

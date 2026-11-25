@@ -1,0 +1,14 @@
+% Listings are read directly from the files that were run, so the report
+% always shows the current code.
+\section{Source Code}\label{app:code}
+The MapReduce code shared by all engines is listed below. The PySpark jobs
+(\texttt{code/spark\_job.py}), the serial baseline (\texttt{code/local\_baseline.py}),
+which calls the same mapper and reducer functions in one process, the cluster definition (\texttt{cluster/}), the
+benchmark and plotting scripts (\texttt{scripts/}) and the cloud deployment scripts
+(\texttt{cloud/}) are in the repository.
+
+\subsection{Mapper (\texttt{code/mapper.py})}
+\lstinputlisting[language=Python]{\coderoot/mapper.py}
+
+\subsection{Reducer and combiner (\texttt{code/reducer.py})}
+\lstinputlisting[language=Python]{\coderoot/reducer.py}

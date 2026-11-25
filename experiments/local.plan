@@ -1,0 +1,20 @@
+# Local Docker cluster (one host, workers capped at 2 CPU / 5 GB).
+# <workers> <tier> <frameworks> <reps>      -- run with: scripts/run_benchmark.sh experiments/local.plan
+# E1 strong scaling (S/M/L x 1-4 workers), E2 data size (XL), E3 combiner (mr vs mr_nocombiner),
+# E4 weak scaling (W3@1, M@2, W9@3, L@4: 3 months of data per worker).
+1 S  serial,mr,mr_nocombiner,spark_rdd,spark_df 3
+1 W3 mr,mr_nocombiner,spark_rdd,spark_df 3
+1 M  serial,mr,mr_nocombiner,spark_rdd,spark_df 3
+1 L  serial,mr,mr_nocombiner,spark_rdd,spark_df 3
+1 XL serial,mr,spark_df 2
+2 S  mr,mr_nocombiner,spark_rdd,spark_df 3
+2 M  mr,mr_nocombiner,spark_rdd,spark_df 3
+2 L  mr,mr_nocombiner,spark_rdd,spark_df 3
+3 S  mr,mr_nocombiner,spark_rdd,spark_df 3
+3 M  mr,mr_nocombiner,spark_rdd,spark_df 3
+3 W9 mr,mr_nocombiner,spark_rdd,spark_df 3
+3 L  mr,mr_nocombiner,spark_rdd,spark_df 3
+4 S  mr,mr_nocombiner,spark_rdd,spark_df 3
+4 M  mr,mr_nocombiner,spark_rdd,spark_df 3
+4 L  mr,mr_nocombiner,spark_rdd,spark_df 3
+4 XL mr,spark_df 2

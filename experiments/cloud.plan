@@ -1,0 +1,10 @@
+# Azure cluster (koreacentral): master VM + up to 2 worker VMs, 2 vCPU / 8 GB each.
+# Run ON the master VM:
+#   CLUSTER_SH=cloud/cluster-cloud.sh ENV_LABEL=azure scripts/run_benchmark.sh experiments/cloud.plan
+# E5: same tiers/engines as local at N=1,2 -> local vs real network at equal N.
+1 S  serial,mr,spark_rdd,spark_df 3
+1 M  serial,mr,mr_nocombiner,spark_rdd,spark_df 3
+1 L  serial,mr,mr_nocombiner,spark_rdd,spark_df 3
+2 S  mr,spark_rdd,spark_df 3
+2 M  mr,mr_nocombiner,spark_rdd,spark_df 3
+2 L  mr,mr_nocombiner,spark_rdd,spark_df 3

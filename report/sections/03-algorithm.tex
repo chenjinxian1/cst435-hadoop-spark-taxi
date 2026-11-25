@@ -1,0 +1,75 @@
+\section{Algorithm and Implementation}\label{sec:algorithm}
+
+\subsection{MapReduce formulation}
+A MapReduce job applies a user \emph{map} function to every input record to produce
+intermediate key--value pairs, groups the pairs by key (the \emph{shuffle}), and
+applies a \emph{reduce} function to each group~\cite{dean2008mapreduce}. We chose a
+single representation for all three jobs: the value is a numeric vector and the
+reduce function is the element-wise sum. \Cref{tab:jobs} gives the keys and
+vectors; averages and rankings are computed from the summed vectors afterwards, on
+data that is at most a few thousand lines.
+
+\begin{table}[t]
+\centering
+\caption{Keys and value vectors emitted by the mapper}\label{tab:jobs}
+\begin{tabular*}{\columnwidth}{@{\extracolsep{\fill}}lll@{}}
+\toprule
+Job & Key & Value vector \\
+\midrule
+\texttt{demand} & pickup zone $|$ hour & $(1)$ \\
+\texttt{routes} & pickup zone $|$ drop-off zone & $(1)$ \\
+\texttt{fare}   & distance band & $(1,\ f,\ c,\ c\,f,\ c\,t)$ \\
+\bottomrule
+\multicolumn{3}{@{}p{\columnwidth}@{}}{\footnotesize $f$ = fare, $t$ = tip,
+$c=1$ for credit-card trips (TLC records tips only for card payments), else $0$.}
+\end{tabular*}
+\end{table}
+
+\begin{algorithm}[t]
+\caption{Mapper, combiner/reducer and post-processing}\label{alg:mr}
+\begin{algorithmic}[1]
+\Procedure{Map}{line}
+  \State $r \gets$ \Call{Parse}{line} \Comment{skip header and invalid rows}
+  \If{$r \neq \bot$} \textbf{emit} $(\mathit{key}(r), \mathit{vec}(r))$ \EndIf
+\EndProcedure
+\Procedure{Reduce}{$k$, $[v_1,\dots,v_m]$} \Comment{also used as combiner}
+  \State \textbf{emit} $(k, \sum_{i} v_i)$ \Comment{element-wise}
+\EndProcedure
+\Procedure{Post}{$\{(k, s_k)\}$}
+  \State \texttt{routes}: sort by $s_k[0]$, keep top $N$
+  \State \texttt{fare}: avg fare $= s[1]/s[0]$, tip rate $= s[4]/s[3]$
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+\textbf{Combiner.} Because addition is associative and commutative, the reducer can
+also run on each map task's output before the shuffle. For \texttt{fare} this
+collapses millions of map outputs into a few lines per map task, so almost nothing
+crosses the network; for \texttt{routes}, with $265^2$ possible keys, the reduction is
+smaller. We measure both variants (\cref{sec:results}).
+
+\textbf{Data cleaning.} \textsc{Parse} rejects rows with a malformed field, a zone
+outside 1--265, a distance outside $(0,100)$ miles, a fare outside $(0,1000)$\,USD or a
+negative tip (\cref{sec:data}).
+
+\subsection{Execution engines}
+\begin{itemize}
+  \item \textbf{Hadoop Streaming}~\cite{hadoop_streaming,noll_streaming}.
+        \texttt{mapper.py} and \texttt{reducer.py} read standard input and write
+        tab-separated lines; Hadoop runs one mapper per
+        128\,MB HDFS block and sorts map output by key before the reducers.
+  \item \textbf{Spark RDD} (on YARN~\cite{spark_yarn}). \texttt{spark\_job.py --api rdd} imports the \emph{same}
+        \texttt{parse} and \texttt{map\_record} functions; \texttt{flatMap} is the map
+        phase and \texttt{reduceByKey} performs combining, shuffle and reduction.
+        Intermediate data stays in memory instead of being written to local disk.
+  \item \textbf{Spark DataFrame.} \texttt{--api df} expresses the same filters and
+        aggregations in Spark SQL, so they are optimised by Catalyst and executed in
+        the JVM without per-record Python calls.
+  \item \textbf{Serial baseline.} \texttt{local\_baseline.py} applies the same
+        functions in one Python process with an in-memory dictionary---the
+        ``single computer'' reference.
+\end{itemize}
+Because all engines share one parser, any difference in run time comes from the
+execution engine, not from the logic. \texttt{scripts/compare\_outputs.py} checks that
+all engines give identical results; on the real data they do for every tier,
+cluster size and environment (\cref{sec:results}).

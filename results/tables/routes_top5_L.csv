@@ -1,0 +1,6 @@
+rank,pickup_zone,dropoff_zone,trips
+1,Upper East Side South (Manhattan),Upper East Side North (Manhattan),275994
+2,Upper East Side North (Manhattan),Upper East Side South (Manhattan),237909
+3,Upper East Side South (Manhattan),Upper East Side South (Manhattan),184456
+4,Upper East Side North (Manhattan),Upper East Side North (Manhattan),180531
+5,Midtown Center (Manhattan),Upper East Side South (Manhattan),129736

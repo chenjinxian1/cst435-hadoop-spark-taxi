@@ -1,0 +1,25 @@
+\section{Conclusion}\label{sec:conclusion}
+We built a containerised Hadoop and Spark cluster, ran it on one host with up to four
+workers and on three Azure VMs, and used it to analyse 79.5~million NYC taxi trips
+with three data-parallel jobs written once in Python. All engines produced identical
+results. Distribution pays off only above roughly 1\,GB of input: on one month of data
+the fixed start-up cost of 13--23\,s exceeds the 4.5\,s serial run. On 3.7\,GB, four
+workers run 3.3--4.0$\times$ faster than one with MapReduce and 2.2--3.1$\times$ with
+Spark DataFrame, and Spark DataFrame is 3.6--5.1$\times$ faster than the serial
+program. The fastest engine scales worst because its fixed cost becomes the serial
+fraction, so absolute times must be reported along with speedups. The combiner
+reduced the shuffle by up to five orders of magnitude but saved time mainly for the
+shuffle-heavy \texttt{fare} job and on the real cloud network. Two VMs scaled more
+regularly than two containers on one host. A poor two-worker result on one host was
+not caused by the page cache, as a controlled experiment showed, and did not reproduce
+in a rerun; it shows that measurements on a shared host vary by about 20\% between
+sessions.
+
+\textbf{Future work.} (i)~Randomise and interleave the run order and repeat every
+configuration in several sessions, so that host disturbances average out;
+(ii)~repeat the cloud study with three or four workers in a region with free quota;
+(iii)~deploy the same image on Kubernetes; (iv)~read Parquet directly in Spark.
+
+\medskip
+\noindent\textbf{Source code and video.} \TODO{Repository URL} \quad
+\TODO{Demonstration video URL}

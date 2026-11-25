@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<configuration>
+  <!-- Replication 1: every block lives on exactly one worker, so adding
+       workers spreads the data instead of copying it (keeps runs comparable). -->
+  <property><name>dfs.replication</name><value>1</value></property>
+  <property><name>dfs.blocksize</name><value>134217728</value></property>  <!-- 128 MB -->
+  <property><name>dfs.namenode.name.dir</name><value>file:///hdfs/nn</value></property>
+  <property><name>dfs.datanode.data.dir</name><value>file:///hdfs/dn</value></property>
+  <property><name>dfs.permissions.enabled</name><value>false</value></property>
+  <!-- Docker DNS reverse lookups return "worker1.hadoop"; skip the strict check. -->
+  <property><name>dfs.namenode.datanode.registration.ip-hostname-check</name><value>false</value></property>
+  <property><name>dfs.namenode.rpc-bind-host</name><value>0.0.0.0</value></property>
+  <property><name>dfs.namenode.http-address</name><value>0.0.0.0:9870</value></property>
+</configuration>

@@ -1,0 +1,116 @@
+packageJobJar: [/tmp/hadoop-unjar2494327380390680890/] [] /tmp/streamjob145539577302050776.jar tmpDir=null
+2026-11-24 14:35:29,013 INFO client.DefaultNoHARMFailoverProxyProvider: Connecting to ResourceManager at master/10.10.1.4:8032
+2026-11-24 14:35:29,274 INFO client.DefaultNoHARMFailoverProxyProvider: Connecting to ResourceManager at master/10.10.1.4:8032
+2026-11-24 14:35:29,580 INFO mapreduce.JobResourceUploader: Disabling Erasure Coding for path: /tmp/hadoop-yarn/staging/hadoop/.staging/job_1795496963748_0045
+2026-11-24 14:35:30,008 INFO mapred.FileInputFormat: Total input files to process : 6
+2026-11-24 14:35:30,011 INFO net.NetworkTopology: Adding a new node: /default-rack/10.10.1.5:9866
+2026-11-24 14:35:30,080 INFO mapreduce.JobSubmitter: number of splits:11
+2026-11-24 14:35:30,788 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1795496963748_0045
+2026-11-24 14:35:30,789 INFO mapreduce.JobSubmitter: Executing with tokens: []
+2026-11-24 14:35:30,984 INFO conf.Configuration: resource-types.xml not found
+2026-11-24 14:35:30,985 INFO resource.ResourceUtils: Unable to find 'resource-types.xml'.
+2026-11-24 14:35:31,053 INFO impl.YarnClientImpl: Submitted application application_1795496963748_0045
+2026-11-24 14:35:31,078 INFO mapreduce.Job: The url to track the job: http://master:8088/proxy/application_1795496963748_0045/
+2026-11-24 14:35:31,079 INFO mapreduce.Job: Running job: job_1795496963748_0045
+2026-11-24 14:35:40,219 INFO mapreduce.Job: Job job_1795496963748_0045 running in uber mode : false
+2026-11-24 14:35:40,220 INFO mapreduce.Job:  map 0% reduce 0%
+2026-11-24 14:36:00,545 INFO mapreduce.Job:  map 6% reduce 0%
+2026-11-24 14:36:06,614 INFO mapreduce.Job:  map 9% reduce 0%
+2026-11-24 14:36:12,668 INFO mapreduce.Job:  map 12% reduce 0%
+2026-11-24 14:36:18,736 INFO mapreduce.Job:  map 15% reduce 0%
+2026-11-24 14:36:19,751 INFO mapreduce.Job:  map 18% reduce 0%
+2026-11-24 14:36:37,996 INFO mapreduce.Job:  map 21% reduce 0%
+2026-11-24 14:36:40,017 INFO mapreduce.Job:  map 24% reduce 0%
+2026-11-24 14:36:44,050 INFO mapreduce.Job:  map 26% reduce 0%
+2026-11-24 14:36:46,069 INFO mapreduce.Job:  map 28% reduce 0%
+2026-11-24 14:36:50,103 INFO mapreduce.Job:  map 29% reduce 0%
+2026-11-24 14:36:52,128 INFO mapreduce.Job:  map 30% reduce 0%
+2026-11-24 14:36:56,162 INFO mapreduce.Job:  map 36% reduce 0%
+2026-11-24 14:37:14,383 INFO mapreduce.Job:  map 39% reduce 0%
+2026-11-24 14:37:15,388 INFO mapreduce.Job:  map 42% reduce 0%
+2026-11-24 14:37:20,431 INFO mapreduce.Job:  map 44% reduce 0%
+2026-11-24 14:37:21,439 INFO mapreduce.Job:  map 46% reduce 0%
+2026-11-24 14:37:26,492 INFO mapreduce.Job:  map 47% reduce 0%
+2026-11-24 14:37:27,501 INFO mapreduce.Job:  map 48% reduce 0%
+2026-11-24 14:37:32,535 INFO mapreduce.Job:  map 55% reduce 0%
+2026-11-24 14:37:50,726 INFO mapreduce.Job:  map 64% reduce 0%
+2026-11-24 14:37:51,736 INFO mapreduce.Job:  map 73% reduce 0%
+2026-11-24 14:38:04,836 INFO mapreduce.Job:  map 82% reduce 0%
+2026-11-24 14:38:09,876 INFO mapreduce.Job:  map 82% reduce 14%
+2026-11-24 14:38:13,904 INFO mapreduce.Job:  map 91% reduce 14%
+2026-11-24 14:38:15,921 INFO mapreduce.Job:  map 91% reduce 15%
+2026-11-24 14:38:20,961 INFO mapreduce.Job:  map 100% reduce 15%
+2026-11-24 14:38:21,971 INFO mapreduce.Job:  map 100% reduce 20%
+2026-11-24 14:38:28,010 INFO mapreduce.Job:  map 100% reduce 33%
+2026-11-24 14:38:34,052 INFO mapreduce.Job:  map 100% reduce 37%
+2026-11-24 14:38:39,102 INFO mapreduce.Job:  map 100% reduce 72%
+2026-11-24 14:38:40,108 INFO mapreduce.Job:  map 100% reduce 76%
+2026-11-24 14:38:45,137 INFO mapreduce.Job:  map 100% reduce 80%
+2026-11-24 14:38:46,143 INFO mapreduce.Job:  map 100% reduce 83%
+2026-11-24 14:38:51,178 INFO mapreduce.Job:  map 100% reduce 87%
+2026-11-24 14:38:52,190 INFO mapreduce.Job:  map 100% reduce 91%
+2026-11-24 14:38:57,226 INFO mapreduce.Job:  map 100% reduce 98%
+2026-11-24 14:39:00,240 INFO mapreduce.Job:  map 100% reduce 100%
+2026-11-24 14:39:00,250 INFO mapreduce.Job: Job job_1795496963748_0045 completed successfully
+2026-11-24 14:39:00,349 INFO mapreduce.Job: Counters: 54
+	File System Counters
+		FILE: Number of bytes read=236031492
+		FILE: Number of bytes written=476142191
+		FILE: Number of read operations=0
+		FILE: Number of large read operations=0
+		FILE: Number of write operations=0
+		HDFS: Number of bytes read=1000770298
+		HDFS: Number of bytes written=470768
+		HDFS: Number of read operations=43
+		HDFS: Number of large read operations=0
+		HDFS: Number of write operations=4
+		HDFS: Number of bytes read erasure-coded=0
+	Job Counters 
+		Launched map tasks=11
+		Launched reduce tasks=2
+		Data-local map tasks=11
+		Total time spent by all maps in occupied slots (ms)=556732
+		Total time spent by all reduces in occupied slots (ms)=206560
+		Total time spent by all map tasks (ms)=278366
+		Total time spent by all reduce tasks (ms)=103280
+		Total vcore-milliseconds taken by all map tasks=278366
+		Total vcore-milliseconds taken by all reduce tasks=103280
+		Total megabyte-milliseconds taken by all map tasks=285046784
+		Total megabyte-milliseconds taken by all reduce tasks=105758720
+	Map-Reduce Framework
+		Map input records=20332093
+		Map output records=19669290
+		Map output bytes=196692900
+		Map output materialized bytes=236031612
+		Input split bytes=990
+		Combine input records=0
+		Combine output records=0
+		Reduce input groups=44136
+		Reduce shuffle bytes=236031612
+		Reduce input records=19669290
+		Reduce output records=44136
+		Spilled Records=39338580
+		Shuffled Maps =22
+		Failed Shuffles=0
+		Merged Map outputs=22
+		GC time elapsed (ms)=1664
+		CPU time spent (ms)=238910
+		Physical memory (bytes) snapshot=4372287488
+		Virtual memory (bytes) snapshot=33262219264
+		Total committed heap usage (bytes)=2984247296
+		Peak Map Physical memory (bytes)=389230592
+		Peak Map Virtual memory (bytes)=2571669504
+		Peak Reduce Physical memory (bytes)=323960832
+		Peak Reduce Virtual memory (bytes)=2579415040
+	Shuffle Errors
+		BAD_ID=0
+		CONNECTION=0
+		IO_ERROR=0
+		WRONG_LENGTH=0
+		WRONG_MAP=0
+		WRONG_REDUCE=0
+	File Input Format Counters 
+		Bytes Read=1000769308
+	File Output Format Counters 
+		Bytes Written=470768
+2026-11-24 14:39:00,349 INFO streaming.StreamJob: Output directory: /out/mr_nocombiner-routes-M

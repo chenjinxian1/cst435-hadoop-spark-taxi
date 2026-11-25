@@ -1,0 +1,305 @@
+{
+  "meta": {
+    "id": "cst435-overview",
+    "title": "System overview: data pipeline, Hadoop/Spark cluster and deployments",
+    "system": {
+      "name": "CST435 taxi analytics",
+      "one_liner": "one Python MapReduce job code run by five engines on a containerised Hadoop/Spark cluster, locally and on Azure"
+    },
+    "figure_kind": "whole-system",
+    "kind": "architecture",
+    "family": "systems",
+    "venue_style": "usenix",
+    "column": "single",
+    "width_pt": 246,
+    "max_height_pt": 200,
+    "template": "layered",
+    "modifiers": [
+      "replicated-grid",
+      "mirrored-pair"
+    ],
+    "direction": "top-down",
+    "panels": 1,
+    "palette": "blue-outline",
+    "font": "helvetica",
+    "step_markers": "circled-numbers",
+    "language": "en",
+    "version": 1,
+    "caption_draft": "System overview. (1) TLC Parquet files are cleaned into CSV tiers and (2) written to HDFS, whose 128 MB blocks are spread over the N workers. (3) run_job.sh submits a job to the ResourceManager, which (4) starts map/reduce tasks or a Spark executor next to the blocks; (5) intermediate pairs are shuffled between workers and (6) the merged output is checked and timed. The same image and the same mapper/reducer code run on 1-4 containers on one host and on Azure VMs.",
+    "open_questions": [],
+    "notes": "Brief confirmed by the user with defaults (single column, accent on the shared job code, Azure as a second deployment strip, no cache-experiment scripts). JobHistory dropped from the master row to keep the single-column budget; it is named in the text. Worker N is mirrored (tasks on the left) so the shuffle crosses the ellipsis gap in a straight line (nsdi24-023_fig3 lesson)."
+  },
+  "containers": [
+    {
+      "id": "master",
+      "label": "master container",
+      "kind": "solid",
+      "title_position": "top-left",
+      "role": "existing",
+      "order": 0
+    },
+    {
+      "id": "worker",
+      "label": "worker 1",
+      "kind": "solid",
+      "title_position": "top-left",
+      "role": "existing",
+      "multiplicity": "xN",
+      "order": 1,
+      "note": "drawn as worker 1 and worker N (mirrored) with an ellipsis"
+    }
+  ],
+  "lanes": [
+    {
+      "id": "local",
+      "label": "Local: one host, N = 1–4 containers of 2 CPU, 5 GB",
+      "kind": "tier",
+      "order": 0
+    },
+    {
+      "id": "azure",
+      "label": "Azure: 3 VMs (master + 2 workers), N = 1–2",
+      "kind": "tier",
+      "order": 1
+    }
+  ],
+  "nodes": [
+    {
+      "id": "namenode",
+      "label": "NameNode",
+      "kind": "module",
+      "parent": "master",
+      "role": "existing"
+    },
+    {
+      "id": "rm",
+      "label": "ResourceManager",
+      "kind": "module",
+      "parent": "master",
+      "role": "existing"
+    },
+    {
+      "id": "runjob",
+      "label": "run_job.sh",
+      "kind": "module",
+      "parent": "master",
+      "role": "novel"
+    },
+    {
+      "id": "jobcode",
+      "label": "mapper.py · reducer.py",
+      "kind": "module",
+      "role": "novel",
+      "emphasis": "accent"
+    },
+    {
+      "id": "datanode",
+      "label": "DataNode",
+      "kind": "store",
+      "parent": "worker",
+      "role": "existing",
+      "note": "with 128 MB block cells"
+    },
+    {
+      "id": "nodemanager",
+      "label": "NodeManager",
+      "kind": "module",
+      "parent": "worker",
+      "role": "existing"
+    },
+    {
+      "id": "tasks",
+      "label": "Map / reduce tasks or Spark executor",
+      "kind": "compute",
+      "parent": "worker",
+      "role": "existing"
+    },
+    {
+      "id": "parquet",
+      "label": "TLC Parquet",
+      "kind": "store",
+      "role": "external"
+    },
+    {
+      "id": "prepare",
+      "label": "prepare_data.py",
+      "kind": "module",
+      "role": "novel"
+    },
+    {
+      "id": "csv",
+      "label": "CSV tiers S–XL",
+      "kind": "store",
+      "role": "novel"
+    },
+    {
+      "id": "results",
+      "label": "compare_outputs benchmark.csv",
+      "kind": "module",
+      "role": "novel"
+    }
+  ],
+  "edges": [
+    {
+      "id": "e-prepare",
+      "from": "parquet",
+      "to": "prepare",
+      "kind": "data",
+      "step": 1
+    },
+    {
+      "id": "e-csv",
+      "from": "prepare",
+      "to": "csv",
+      "kind": "data"
+    },
+    {
+      "id": "e-put",
+      "from": "csv",
+      "to": "datanode",
+      "kind": "data",
+      "step": 2,
+      "x-meaning": "hdfs put"
+    },
+    {
+      "id": "e-submit",
+      "from": "runjob",
+      "to": "rm",
+      "kind": "control",
+      "step": 3
+    },
+    {
+      "id": "e-launch",
+      "from": "rm",
+      "to": "nodemanager",
+      "kind": "control",
+      "step": 4
+    },
+    {
+      "id": "e-start",
+      "from": "nodemanager",
+      "to": "tasks",
+      "kind": "control"
+    },
+    {
+      "id": "e-read",
+      "from": "datanode",
+      "to": "tasks",
+      "kind": "data"
+    },
+    {
+      "id": "e-shuffle",
+      "from": "tasks",
+      "to": "tasks",
+      "kind": "data",
+      "step": 5,
+      "note": "between worker 1 and worker N, both directions",
+      "x-meaning": "shuffle"
+    },
+    {
+      "id": "e-output",
+      "from": "tasks",
+      "to": "results",
+      "kind": "data",
+      "step": 6
+    },
+    {
+      "id": "e-ship",
+      "from": "jobcode",
+      "to": "runjob",
+      "kind": "dependency",
+      "style": "dotted",
+      "x-meaning": "-files"
+    },
+    {
+      "id": "e-blockmap",
+      "from": "namenode",
+      "to": "datanode",
+      "kind": "control",
+      "style": "dashed",
+      "x-meaning": "block map"
+    }
+  ],
+  "steps": [
+    {
+      "n": 1,
+      "attached_to": "e-prepare",
+      "text": "clean Parquet into CSV tiers"
+    },
+    {
+      "n": 2,
+      "attached_to": "e-put",
+      "text": "write the tier to HDFS"
+    },
+    {
+      "n": 3,
+      "attached_to": "e-submit",
+      "text": "submit the job"
+    },
+    {
+      "n": 4,
+      "attached_to": "e-launch",
+      "text": "start tasks next to the blocks"
+    },
+    {
+      "n": 5,
+      "attached_to": "e-shuffle",
+      "text": "shuffle intermediate pairs"
+    },
+    {
+      "n": 6,
+      "attached_to": "e-output",
+      "text": "check and time the output"
+    }
+  ],
+  "legend": {
+    "mode": "explicit",
+    "placement": "inside",
+    "items": [
+      {
+        "id": "ours",
+        "label": "our scripts",
+        "x-encodes": "fill/novel"
+      },
+      {
+        "id": "stack",
+        "label": "Hadoop / Spark",
+        "x-encodes": "fill/existing"
+      },
+      {
+        "id": "dashed",
+        "label": "block map (control)",
+        "x-encodes": "edge/dashed"
+      },
+      {
+        "id": "dotted",
+        "label": "code shipped with job",
+        "x-encodes": "edge/dotted"
+      }
+    ]
+  },
+  "annotations": [],
+  "constraints": [
+    {
+      "kind": "same-row",
+      "targets": [
+        "namenode",
+        "rm",
+        "runjob",
+        "jobcode"
+      ],
+      "note": "control row on top"
+    },
+    {
+      "kind": "same-row",
+      "targets": [
+        "parquet",
+        "prepare",
+        "csv",
+        "results"
+      ],
+      "note": "data row at the bottom"
+    }
+  ],
+  "style_overrides": {}
+}

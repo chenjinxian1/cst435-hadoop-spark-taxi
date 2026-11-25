@@ -1,0 +1,130 @@
+\section{Discussion}\label{sec:discussion}
+
+\subsection{When does distribution pay off?}
+Every cluster run pays a fixed cost that does not depend on the input: about 13--18\,s
+for Spark and 18--23\,s for MapReduce on the local cluster (the tier~S time minus the
+serial time), and about twice as much on the slower cloud VMs. On one month of data
+this cost is three to five times the whole serial computation, so a cluster is
+pointless at that size. Spark DataFrame on one worker breaks even with the serial
+baseline at about six months of data (tier M, 1\,GB) and is 1.2--1.4$\times$ faster at
+twelve months. MapReduce needs three to four workers to match the serial program on 2\,GB and wins clearly only
+on 3.7\,GB (tier XL). Note that one worker has two CPUs while the serial program uses
+one, so this comparison even favours the cluster.
+
+The weak-scaling efficiency of 0.67--0.79 at four workers shows the same effect from
+the other side: when the data grow with the cluster, the run time grows only slowly,
+mainly because the fixed cost is paid once per job rather than once per worker.
+
+\subsection{Scalability and its limits}
+\textbf{Amdahl's law.} The Karp--Flatt estimate on tier L at $N=4$ is
+$e=0.15$--$0.22$ for MapReduce, 0.23--0.33 for Spark RDD and 0.37--0.44 for Spark
+DataFrame (\cref{tab:summary}). These values roughly agree with a simple model in
+which the fixed cost is the serial part: for Spark DataFrame, about 15\,s of fixed cost
+out of $T_1\approx50$\,s is a serial fraction of about 0.3, which by Amdahl's law
+bounds the speedup to about~3.3 however many workers are added; for MapReduce, about
+20\,s out of 150\,s gives 0.13. The fastest engine therefore scales
+\emph{worst}: its parallel part is so short that the constant start-up dominates. On
+tier XL the parallel part is larger and $e$ drops to 0.10--0.26 for Spark DataFrame and
+below 0.07 for MapReduce. Relative speedup alone would make MapReduce look like the
+better system; the absolute times show the opposite.
+
+\textbf{Task granularity.} Tier L has 24 HDFS blocks and hence 24 map tasks. YARN
+schedules by memory, so each worker runs three 1\,GB containers, one of which hosts
+the MapReduce application master. With three workers 8 maps run at once (exactly three
+waves); with four workers 11 run at once, and the third wave contains only two tasks.
+This explains why MapReduce gains only 4--15\% from the fourth worker on tier L but
+3.35--3.97$\times$ from one to four workers on tier XL (48 tasks).
+
+\begin{table}[t]
+\centering
+\caption{Cache experiment, \texttt{routes} on tier L: mean run time (s) after dropping
+the page cache (cold) and directly afterwards (warm), largest disk read in a warm run,
+and CPU time withheld by the 2-CPU cap per worker and second (3 pairs per cell)}\label{tab:cache}
+\setlength{\tabcolsep}{2.5pt}
+\begin{tabular*}{\columnwidth}{@{\extracolsep{\fill}}rrrrrrrrr@{}}
+\toprule
+ & Data/wkr & \multicolumn{2}{c}{MapReduce} & \multicolumn{2}{c}{Spark DF} & Warm read & \multicolumn{2}{c}{Throttled} \\
+\cmidrule(lr){3-4}\cmidrule(lr){5-6}\cmidrule(l){8-9}
+$N$ & (GiB) & cold & warm & cold & warm & (MiB) & MR & DF \\
+\midrule
+\inputrows{generated/cache_table.tex}
+\bottomrule
+\end{tabular*}
+\end{table}
+
+\textbf{The two-worker anomaly.} The poor result at $N=2$ on tier L
+(\cref{sec:results}) is specific to one tier and one environment. Our first
+hypothesis was the page cache: the 5\,GB limit of a container also counts the cached
+HDFS blocks, so with one or two workers holding 1--2\,GB each, blocks might be re-read
+from the shared virtual disk. We tested it with a further 48 runs
+(\cref{tab:cache}): \texttt{routes} on tier L with $N=1$--4, MapReduce and Spark
+DataFrame, three pairs each, where the page cache of the Docker VM is dropped before
+the \emph{cold} run and the \emph{warm} run follows directly. For each worker we read
+the cgroup counters for bytes read from disk, refaulted cache pages and throttled CPU
+time. The hypothesis is \emph{refuted}: even with all 2.3\,GiB on one worker, warm
+runs read at most 3\,MiB from disk, no page was refaulted and no container reached its
+memory limit, and cold runs, which read the whole input from disk, differ from warm
+runs by less than 5\,s. Moreover, the anomaly did not reproduce: at $N=2$ the rerun gives
+$S_\text{rel}(2)\approx1.5$ for both engines, on a smooth curve between $N=1$ and
+$N=3$. In the main benchmark all $N=2$ runs on tier L fell into one hour of the night
+(01:30--02:30) and the configurations ran in a fixed order, so we attribute the anomaly
+to a transient disturbance on the host during that hour, which we cannot identify
+after the fact. The rerun also shows the size of session-to-session variation on a
+shared host: at $N=1$ it matches the main benchmark within 3\%, but at $N=3$--4 its
+warm runs are 20\% slower, so MapReduce reaches only $S_\text{rel}(4)\approx2.0$ instead of 2.4.
+Speedups on tier L therefore carry an uncertainty of this order.
+
+The throttling counters support the task-granularity argument. A MapReduce worker runs
+three 1\,GB containers, each a JVM plus a Python process, on a 2-CPU quota: the cap
+withholds 0.7 CPU-seconds per second at $N=1$, where one container is the application
+master, and 1.4--1.7 at $N\ge2$, where a worker runs three map tasks. Spark runs one
+2-core executor per worker and is throttled by only 0.2. MapReduce is thus CPU-bound
+and oversubscribed. Finally, the \texttt{cpus} limit caps CPU time but does not pin
+containers to cores, so on the hybrid i5-13600KF a worker may run on a performance core,
+an efficiency core or a hyper-thread of a busy core.
+
+\subsection{Effect of the combiner}
+The combiner reduces the shuffle by two to five orders of magnitude
+(\cref{fig:combcloud}a), but saves time only when the shuffle is large compared with
+the rest of the job. On \texttt{fare} the uncombined shuffle (1.1\,GiB) is 2.5--2.8
+times that of \texttt{demand} or \texttt{routes}, and the combiner saves up to 24\%
+locally and 29\% on Azure. For the other two jobs, 400--450\,MiB are shuffled without measurable
+cost on one host, where the ``network'' is a virtual bridge in memory, but the combiner
+saves 7--10\% on Azure, where the data cross a real network. On a larger cluster with
+slower links we expect the benefit to grow.
+
+\subsection{Hadoop MapReduce vs.\ Spark}
+On one worker and tier L, Spark RDD is 2.0--2.1$\times$ faster than MapReduce and Spark
+DataFrame 3.0--3.1$\times$ faster, although all three run the same algorithm. MapReduce
+starts a new JVM for every task, writes and sorts all map output on local disk before
+the reduce phase, and, with Streaming, passes every record as text through a pipe to a
+Python process and back. Spark reuses one executor per worker for all tasks and
+aggregates in an in-memory hash table~\cite{zaharia2012rdd}. Spark RDD still calls the
+Python \texttt{parse} and \texttt{map\_record} functions once per record and moves data
+between the JVM and Python workers; the DataFrame version runs entirely in the JVM.
+The 1.5$\times$ difference between Spark RDD and DataFrame is therefore the cost of
+executing user code in Python, and the remaining 2$\times$ between MapReduce and Spark
+RDD is the cost of the disk-based MapReduce execution model.
+
+\subsection{Single host vs.\ public cloud}
+The local machine is faster per worker: the serial program runs 2.0$\times$ faster on
+one i5-13600KF core than on one Azure vCPU, and the engines 2.5--3.3$\times$ faster.
+Two Azure vCPUs are the two hyper-threads of one older server core, whereas a local
+worker usually gets two separate modern cores. The cloud, however, scales more
+regularly, because each worker there owns its disk, memory and network interface. The
+single-host cluster is cheap and convenient for development, but adding containers on
+one host adds CPU quota, not independent hardware, and its speedup measurements can be
+distorted by shared resources. The cloud cluster cost about US\$4 for all experiments;
+for the same money the local machine was faster, but it cannot grow beyond one host.
+
+\subsection{Threats to validity}
+(i)~All local workers share one host, disk and memory bus (see above). (ii)~Only two
+cloud workers were possible within the student subscription's limit of six vCPUs per
+region, and the cloud master uses a different CPU model than the workers.
+(iii)~Repetitions were consecutive and the configurations ran in a fixed order, so a
+disturbance of the host affects all repetitions of one configuration, as at $N=2$ on
+tier L; a rerun in another session differed by up to 20\%. A warm page cache, in
+contrast, changes run times by at most 5\,s (\cref{tab:cache}). (iv)~Apart from the
+cache experiment we measured wall-clock time only, and even there not network
+traffic or per-core CPU utilisation. (v)~The input is CSV converted from Parquet,
+which favours line-based Hadoop Streaming; Spark could read Parquet directly.

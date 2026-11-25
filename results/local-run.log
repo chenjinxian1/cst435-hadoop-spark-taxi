@@ -1,0 +1,974 @@
+=== 2026-11-24 12:49:15  cluster with 1 worker(s) ===
+ Image cst435/hadoop-spark:latest Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 863B 0.1s done
+#1 DONE 0.1s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 1.94kB done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/eclipse-temurin:11-jdk-jammy
+#3 DONE 0.9s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
+
+#5 [1/9] FROM docker.io/library/eclipse-temurin:11-jdk-jammy@sha256:56baf52be9510d77b5eaca50f3b0d5b4553ceffe6f98a52d4c82b5f4c73c5b82
+#5 resolve docker.io/library/eclipse-temurin:11-jdk-jammy@sha256:56baf52be9510d77b5eaca50f3b0d5b4553ceffe6f98a52d4c82b5f4c73c5b82 0.0s done
+#5 DONE 0.0s
+
+#6 [internal] load build context
+#6 transferring context: 269B done
+#6 DONE 0.0s
+
+#7 [3/9] RUN curl -fsSL https://archive.apache.org/dist/hadoop/common/hadoop-3.4.1/hadoop-3.4.1.tar.gz       | tar -xz -C /opt  && mv /opt/hadoop-3.4.1 /opt/hadoop  && rm -rf /opt/hadoop/share/doc  && mkdir -p /opt/hadoop/logs /hdfs/nn /hdfs/dn  && chown -R hadoop:hadoop /opt/hadoop /hdfs
+#7 CACHED
+
+#8 [5/9] COPY --chown=hadoop:hadoop config/*.xml /opt/hadoop/etc/hadoop/
+#8 CACHED
+
+#9 [7/9] COPY entrypoint.sh /entrypoint.sh
+#9 CACHED
+
+#10 [8/9] RUN sed -i 's/\r$//' /entrypoint.sh && chmod +x /entrypoint.sh  && echo "export JAVA_HOME=/opt/java/openjdk" >> /opt/hadoop/etc/hadoop/hadoop-env.sh
+#10 CACHED
+
+#11 [2/9] RUN apt-get update  && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends       python3 python3-pip curl procps netcat-openbsd  && rm -rf /var/lib/apt/lists/*  && ln -sf /usr/bin/python3 /usr/bin/python  && useradd -m -s /bin/bash hadoop
+#11 CACHED
+
+#12 [4/9] RUN curl -fsSL https://archive.apache.org/dist/spark/spark-3.5.5/spark-3.5.5-bin-hadoop3.tgz       | tar -xz -C /opt  && mv /opt/spark-3.5.5-bin-hadoop3 /opt/spark  && chown -R hadoop:hadoop /opt/spark
+#12 CACHED
+
+#13 [6/9] COPY --chown=hadoop:hadoop config/spark-defaults.conf /opt/spark/conf/
+#13 CACHED
+
+#14 [9/9] WORKDIR /home/hadoop
+#14 CACHED
+
+#15 exporting to image
+#15 exporting layers done
+#15 exporting manifest sha256:883c14bb79718e93f153da74c65256bfce2a107adf8a7011345b3cd16197c51f done
+#15 exporting config sha256:65f0adc97f08123ff246eae3a2a996e2fade5ad263ab525d7f9b633653b5befd
+#15 exporting config sha256:65f0adc97f08123ff246eae3a2a996e2fade5ad263ab525d7f9b633653b5befd done
+#15 exporting attestation manifest sha256:26accd41f78c542b0d5d5bdbeca082cea4a6e63c334bcbb0156aa4036cce5b14 0.0s done
+#15 exporting manifest list sha256:d97ab17597254afae921339818571741a3193f195ce3ecbdb89b9baf55e17cf5 0.0s done
+#15 naming to docker.io/cst435/hadoop-spark:latest done
+#15 unpacking to docker.io/cst435/hadoop-spark:latest done
+#15 DONE 0.1s
+
+#16 resolving provenance for metadata file
+#16 DONE 0.0s
+ Image cst435/hadoop-spark:latest Built 
+ Network hadoop Creating 
+ Network hadoop Created 
+ Container master Creating 
+ Container master Created 
+ Container worker1 Creating 
+ Container worker1 Created 
+ Container master Starting 
+ Container master Started 
+ Container worker1 Starting 
+ Container worker1 Started 
+  ok: HDFS out of safe mode
+  ok: 1 live DataNodes
+  ok: 1 YARN NodeManagers
+cluster up: master + 1 worker(s)
+--- tier S: serial,mr,mr_nocombiner,spark_rdd,spark_df x 3
+141.8 M  141.8 M  /input/S
+  serial         demand  S   n=1 rep=1      4.33s  ok
+  serial         demand  S   n=1 rep=2      4.38s  ok
+  serial         demand  S   n=1 rep=3      4.46s  ok
+  mr             demand  S   n=1 rep=1     23.70s  ok
+  mr             demand  S   n=1 rep=2     23.17s  ok
+  mr             demand  S   n=1 rep=3     23.67s  ok
+  mr_nocombiner  demand  S   n=1 rep=1     25.20s  ok
+  mr_nocombiner  demand  S   n=1 rep=2     24.22s  ok
+  mr_nocombiner  demand  S   n=1 rep=3     24.18s  ok
+  spark_rdd      demand  S   n=1 rep=1     20.99s  ok
+  spark_rdd      demand  S   n=1 rep=2     19.02s  ok
+  spark_rdd      demand  S   n=1 rep=3     17.00s  ok
+  spark_df       demand  S   n=1 rep=1     17.28s  ok
+  spark_df       demand  S   n=1 rep=2     16.81s  ok
+  spark_df       demand  S   n=1 rep=3     18.02s  ok
+  serial         routes  S   n=1 rep=1      4.53s  ok
+  serial         routes  S   n=1 rep=2      4.45s  ok
+  serial         routes  S   n=1 rep=3      4.53s  ok
+  mr             routes  S   n=1 rep=1     22.27s  ok
+  mr             routes  S   n=1 rep=2     24.11s  ok
+  mr             routes  S   n=1 rep=3     23.70s  ok
+  mr_nocombiner  routes  S   n=1 rep=1     24.71s  ok
+  mr_nocombiner  routes  S   n=1 rep=2     24.78s  ok
+  mr_nocombiner  routes  S   n=1 rep=3     23.31s  ok
+  spark_rdd      routes  S   n=1 rep=1     17.42s  ok
+  spark_rdd      routes  S   n=1 rep=2     18.14s  ok
+  spark_rdd      routes  S   n=1 rep=3     18.60s  ok
+  spark_df       routes  S   n=1 rep=1     18.00s  ok
+  spark_df       routes  S   n=1 rep=2     16.69s  ok
+  spark_df       routes  S   n=1 rep=3     18.06s  ok
+  serial         fare    S   n=1 rep=1      3.87s  ok
+  serial         fare    S   n=1 rep=2      4.61s  ok
+  serial         fare    S   n=1 rep=3      4.53s  ok
+  mr             fare    S   n=1 rep=1     23.87s  ok
+  mr             fare    S   n=1 rep=2     23.68s  ok
+  mr             fare    S   n=1 rep=3     25.42s  ok
+  mr_nocombiner  fare    S   n=1 rep=1     27.88s  ok
+  mr_nocombiner  fare    S   n=1 rep=2     26.74s  ok
+  mr_nocombiner  fare    S   n=1 rep=3     25.67s  ok
+  spark_rdd      fare    S   n=1 rep=1     17.94s  ok
+  spark_rdd      fare    S   n=1 rep=2     21.15s  ok
+  spark_rdd      fare    S   n=1 rep=3     19.96s  ok
+  spark_df       fare    S   n=1 rep=1     18.45s  ok
+  spark_df       fare    S   n=1 rep=2     18.48s  ok
+  spark_df       fare    S   n=1 rep=3     18.84s  ok
+--- tier W3: mr,mr_nocombiner,spark_rdd,spark_df x 3
+457.3 M  457.3 M  /input/W3
+  mr             demand  W3  n=1 rep=1     43.77s  ok
+  mr             demand  W3  n=1 rep=2     42.47s  ok
+  mr             demand  W3  n=1 rep=3     39.91s  ok
+  mr_nocombiner  demand  W3  n=1 rep=1     40.54s  ok
+  mr_nocombiner  demand  W3  n=1 rep=2     40.86s  ok
+  mr_nocombiner  demand  W3  n=1 rep=3     40.97s  ok
+  spark_rdd      demand  W3  n=1 rep=1     26.73s  ok
+  spark_rdd      demand  W3  n=1 rep=2     28.47s  ok
+  spark_rdd      demand  W3  n=1 rep=3     27.00s  ok
+  spark_df       demand  W3  n=1 rep=1     23.51s  ok
+  spark_df       demand  W3  n=1 rep=2     21.71s  ok
+  spark_df       demand  W3  n=1 rep=3     23.24s  ok
+  mr             routes  W3  n=1 rep=1     42.61s  ok
+  mr             routes  W3  n=1 rep=2     40.72s  ok
+  mr             routes  W3  n=1 rep=3     40.95s  ok
+  mr_nocombiner  routes  W3  n=1 rep=1     41.69s  ok
+  mr_nocombiner  routes  W3  n=1 rep=2     41.78s  ok
+  mr_nocombiner  routes  W3  n=1 rep=3     41.65s  ok
+  spark_rdd      routes  W3  n=1 rep=1     26.73s  ok
+  spark_rdd      routes  W3  n=1 rep=2     26.65s  ok
+  spark_rdd      routes  W3  n=1 rep=3     26.45s  ok
+  spark_df       routes  W3  n=1 rep=1     23.02s  ok
+  spark_df       routes  W3  n=1 rep=2     23.44s  ok
+  spark_df       routes  W3  n=1 rep=3     23.35s  ok
+  mr             fare    W3  n=1 rep=1     46.93s  ok
+  mr             fare    W3  n=1 rep=2     46.66s  ok
+  mr             fare    W3  n=1 rep=3     44.66s  ok
+  mr_nocombiner  fare    W3  n=1 rep=1     50.53s  ok
+  mr_nocombiner  fare    W3  n=1 rep=2     53.15s  ok
+  mr_nocombiner  fare    W3  n=1 rep=3     52.87s  ok
+  spark_rdd      fare    W3  n=1 rep=1     26.33s  ok
+  spark_rdd      fare    W3  n=1 rep=2     25.73s  ok
+  spark_rdd      fare    W3  n=1 rep=3     25.43s  ok
+  spark_df       fare    W3  n=1 rep=1     22.52s  ok
+  spark_df       fare    W3  n=1 rep=2     21.50s  ok
+  spark_df       fare    W3  n=1 rep=3     21.93s  ok
+--- tier M: serial,mr,mr_nocombiner,spark_rdd,spark_df x 3
+973.8 M  973.8 M  /input/M
+  serial         demand  M   n=1 rep=1     30.75s  ok
+  serial         demand  M   n=1 rep=2     30.10s  ok
+  serial         demand  M   n=1 rep=3     32.34s  ok
+  mr             demand  M   n=1 rep=1     74.83s  ok
+  mr             demand  M   n=1 rep=2     73.59s  ok
+  mr             demand  M   n=1 rep=3     74.80s  ok
+  mr_nocombiner  demand  M   n=1 rep=1     77.72s  ok
+  mr_nocombiner  demand  M   n=1 rep=2     75.06s  ok
+  mr_nocombiner  demand  M   n=1 rep=3     79.36s  ok
+  spark_rdd      demand  M   n=1 rep=1     44.77s  ok
+  spark_rdd      demand  M   n=1 rep=2     43.43s  ok
+  spark_rdd      demand  M   n=1 rep=3     43.57s  ok
+  spark_df       demand  M   n=1 rep=1     33.60s  ok
+  spark_df       demand  M   n=1 rep=2     35.23s  ok
+  spark_df       demand  M   n=1 rep=3     37.51s  ok
+  serial         routes  M   n=1 rep=1     37.14s  ok
+  serial         routes  M   n=1 rep=2     34.35s  ok
+  serial         routes  M   n=1 rep=3     31.92s  ok
+  mr             routes  M   n=1 rep=1     78.88s  ok
+  mr             routes  M   n=1 rep=2     78.74s  ok
+  mr             routes  M   n=1 rep=3     79.81s  ok
+  mr_nocombiner  routes  M   n=1 rep=1     81.38s  ok
+  mr_nocombiner  routes  M   n=1 rep=2     83.94s  ok
+  mr_nocombiner  routes  M   n=1 rep=3     77.63s  ok
+  spark_rdd      routes  M   n=1 rep=1     42.54s  ok
+  spark_rdd      routes  M   n=1 rep=2     43.03s  ok
+  spark_rdd      routes  M   n=1 rep=3     41.59s  ok
+  spark_df       routes  M   n=1 rep=1     33.60s  ok
+  spark_df       routes  M   n=1 rep=2     32.27s  ok
+  spark_df       routes  M   n=1 rep=3     31.12s  ok
+  serial         fare    M   n=1 rep=1     31.27s  ok
+  serial         fare    M   n=1 rep=2     32.12s  ok
+  serial         fare    M   n=1 rep=3     31.52s  ok
+  mr             fare    M   n=1 rep=1     90.01s  ok
+  mr             fare    M   n=1 rep=2     91.09s  ok
+  mr             fare    M   n=1 rep=3     86.04s  ok
+  mr_nocombiner  fare    M   n=1 rep=1    106.25s  ok
+  mr_nocombiner  fare    M   n=1 rep=2    102.12s  ok
+  mr_nocombiner  fare    M   n=1 rep=3     96.65s  ok
+  spark_rdd      fare    M   n=1 rep=1     39.30s  ok
+  spark_rdd      fare    M   n=1 rep=2     39.70s  ok
+  spark_rdd      fare    M   n=1 rep=3     38.87s  ok
+  spark_df       fare    M   n=1 rep=1     31.00s  ok
+  spark_df       fare    M   n=1 rep=2     32.33s  ok
+  spark_df       fare    M   n=1 rep=3     30.51s  ok
+--- tier L: serial,mr,mr_nocombiner,spark_rdd,spark_df x 3
+1.9 G  1.9 G  /input/L
+  serial         demand  L   n=1 rep=1     61.01s  ok
+  serial         demand  L   n=1 rep=2     62.62s  ok
+  serial         demand  L   n=1 rep=3     62.52s  ok
+  mr             demand  L   n=1 rep=1    152.61s  ok
+  mr             demand  L   n=1 rep=2    145.60s  ok
+  mr             demand  L   n=1 rep=3    143.27s  ok
+  mr_nocombiner  demand  L   n=1 rep=1    141.75s  ok
+  mr_nocombiner  demand  L   n=1 rep=2    144.20s  ok
+  mr_nocombiner  demand  L   n=1 rep=3    148.57s  ok
+  spark_rdd      demand  L   n=1 rep=1     79.97s  ok
+  spark_rdd      demand  L   n=1 rep=2     70.28s  ok
+  spark_rdd      demand  L   n=1 rep=3     71.56s  ok
+  spark_df       demand  L   n=1 rep=1     48.24s  ok
+  spark_df       demand  L   n=1 rep=2     50.04s  ok
+  spark_df       demand  L   n=1 rep=3     48.91s  ok
+  serial         routes  L   n=1 rep=1     69.66s  ok
+  serial         routes  L   n=1 rep=2     70.46s  ok
+  serial         routes  L   n=1 rep=3     67.84s  ok
+  mr             routes  L   n=1 rep=1    147.15s  ok
+  mr             routes  L   n=1 rep=2    147.35s  ok
+  mr             routes  L   n=1 rep=3    146.53s  ok
+  mr_nocombiner  routes  L   n=1 rep=1    150.07s  ok
+  mr_nocombiner  routes  L   n=1 rep=2    149.67s  ok
+  mr_nocombiner  routes  L   n=1 rep=3    159.10s  ok
+  spark_rdd      routes  L   n=1 rep=1     75.22s  ok
+  spark_rdd      routes  L   n=1 rep=2     71.32s  ok
+  spark_rdd      routes  L   n=1 rep=3     74.19s  ok
+  spark_df       routes  L   n=1 rep=1     47.54s  ok
+  spark_df       routes  L   n=1 rep=2     47.66s  ok
+  spark_df       routes  L   n=1 rep=3     53.29s  ok
+  serial         fare    L   n=1 rep=1     69.85s  ok
+  serial         fare    L   n=1 rep=2     63.11s  ok
+  serial         fare    L   n=1 rep=3     63.34s  ok
+  mr             fare    L   n=1 rep=1    164.02s  ok
+  mr             fare    L   n=1 rep=2    168.77s  ok
+  mr             fare    L   n=1 rep=3    174.18s  ok
+  mr_nocombiner  fare    L   n=1 rep=1    211.44s  ok
+  mr_nocombiner  fare    L   n=1 rep=2    215.50s  ok
+  mr_nocombiner  fare    L   n=1 rep=3    240.77s  ok
+  spark_rdd      fare    L   n=1 rep=1     85.26s  ok
+  spark_rdd      fare    L   n=1 rep=2     81.88s  ok
+  spark_rdd      fare    L   n=1 rep=3     77.51s  ok
+  spark_df       fare    L   n=1 rep=1     53.78s  ok
+  spark_df       fare    L   n=1 rep=2     56.39s  ok
+  spark_df       fare    L   n=1 rep=3     55.16s  ok
+--- tier XL: serial,mr,spark_df x 2
+3.7 G  3.7 G  /input/XL
+  serial         demand  XL  n=1 rep=1    138.35s  ok
+  serial         demand  XL  n=1 rep=2    138.98s  ok
+request returned 500 Internal Server Error for API route and version http://%2F%2F.%2Fpipe%2FdockerDesktopLinuxEngine/v1.56/exec/e8cb2b00a413fb13a6901417612fcd0c59246c22f4b9ae9d795b8ad1dc9b04f6/json, check if the server supports the requested API version
+  mr             demand  XL  n=1 rep=1          s  failed
+Error response from daemon: container d20ef8a9d2b52dd7e0f8849f7a000a299452b80282241dd434f30d3b254e6dba is not running
+  mr             demand  XL  n=1 rep=2          s  failed
+Error response from daemon: container d20ef8a9d2b52dd7e0f8849f7a000a299452b80282241dd434f30d3b254e6dba is not running
+  spark_df       demand  XL  n=1 rep=1          s  failed
+Error response from daemon: container d20ef8a9d2b52dd7e0f8849f7a000a299452b80282241dd434f30d3b254e6dba is not running
+  spark_df       demand  XL  n=1 rep=2          s  failed
+Error response from daemon: container d20ef8a9d2b52dd7e0f8849f7a000a299452b80282241dd434f30d3b254e6dba is not running
+  serial         routes  XL  n=1 rep=1          s  failed
+Error response from daemon: container d20ef8a9d2b52dd7e0f8849f7a000a299452b80282241dd434f30d3b254e6dba is not running
+  serial         routes  XL  n=1 rep=2          s  failed
+Error response from daemon: container d20ef8a9d2b52dd7e0f8849f7a000a299452b80282241dd434f30d3b254e6dba is not running
+  mr             routes  XL  n=1 rep=1          s  failed
+Error response from daemon: container d20ef8a9d2b52dd7e0f8849f7a000a299452b80282241dd434f30d3b254e6dba is not running
+  mr             routes  XL  n=1 rep=2          s  failed
+Error response from daemon: container d20ef8a9d2b52dd7e0f8849f7a000a299452b80282241dd434f30d3b254e6dba is not running
+  spark_df       routes  XL  n=1 rep=1          s  failed
+Error response from daemon: container d20ef8a9d2b52dd7e0f8849f7a000a299452b80282241dd434f30d3b254e6dba is not running
+  spark_df       routes  XL  n=1 rep=2          s  failed
+Error response from daemon: container d20ef8a9d2b52dd7e0f8849f7a000a299452b80282241dd434f30d3b254e6dba is not running
+  serial         fare    XL  n=1 rep=1          s  failed
+Error response from daemon: container d20ef8a9d2b52dd7e0f8849f7a000a299452b80282241dd434f30d3b254e6dba is not running
+  serial         fare    XL  n=1 rep=2          s  failed
+Error response from daemon: container d20ef8a9d2b52dd7e0f8849f7a000a299452b80282241dd434f30d3b254e6dba is not running
+  mr             fare    XL  n=1 rep=1          s  failed
+Error response from daemon: container d20ef8a9d2b52dd7e0f8849f7a000a299452b80282241dd434f30d3b254e6dba is not running
+  mr             fare    XL  n=1 rep=2          s  failed
+Error response from daemon: container d20ef8a9d2b52dd7e0f8849f7a000a299452b80282241dd434f30d3b254e6dba is not running
+  spark_df       fare    XL  n=1 rep=1          s  failed
+Error response from daemon: container d20ef8a9d2b52dd7e0f8849f7a000a299452b80282241dd434f30d3b254e6dba is not running
+  spark_df       fare    XL  n=1 rep=2          s  failed
+=== 2026-11-24 15:49:21  cluster with 2 worker(s) ===
+ Image cst435/hadoop-spark:latest Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 863B 0.0s done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 1.94kB 0.0s done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/eclipse-temurin:11-jdk-jammy
+#3 DONE 1.4s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
+
+#5 [1/9] FROM docker.io/library/eclipse-temurin:11-jdk-jammy@sha256:56baf52be9510d77b5eaca50f3b0d5b4553ceffe6f98a52d4c82b5f4c73c5b82
+#5 resolve docker.io/library/eclipse-temurin:11-jdk-jammy@sha256:56baf52be9510d77b5eaca50f3b0d5b4553ceffe6f98a52d4c82b5f4c73c5b82 0.0s done
+#5 DONE 0.0s
+
+#6 [internal] load build context
+#6 transferring context: 269B done
+#6 DONE 0.0s
+
+#7 [3/9] RUN curl -fsSL https://archive.apache.org/dist/hadoop/common/hadoop-3.4.1/hadoop-3.4.1.tar.gz       | tar -xz -C /opt  && mv /opt/hadoop-3.4.1 /opt/hadoop  && rm -rf /opt/hadoop/share/doc  && mkdir -p /opt/hadoop/logs /hdfs/nn /hdfs/dn  && chown -R hadoop:hadoop /opt/hadoop /hdfs
+#7 CACHED
+
+#8 [6/9] COPY --chown=hadoop:hadoop config/spark-defaults.conf /opt/spark/conf/
+#8 CACHED
+
+#9 [7/9] COPY entrypoint.sh /entrypoint.sh
+#9 CACHED
+
+#10 [4/9] RUN curl -fsSL https://archive.apache.org/dist/spark/spark-3.5.5/spark-3.5.5-bin-hadoop3.tgz       | tar -xz -C /opt  && mv /opt/spark-3.5.5-bin-hadoop3 /opt/spark  && chown -R hadoop:hadoop /opt/spark
+#10 CACHED
+
+#11 [5/9] COPY --chown=hadoop:hadoop config/*.xml /opt/hadoop/etc/hadoop/
+#11 CACHED
+
+#12 [2/9] RUN apt-get update  && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends       python3 python3-pip curl procps netcat-openbsd  && rm -rf /var/lib/apt/lists/*  && ln -sf /usr/bin/python3 /usr/bin/python  && useradd -m -s /bin/bash hadoop
+#12 CACHED
+
+#13 [8/9] RUN sed -i 's/\r$//' /entrypoint.sh && chmod +x /entrypoint.sh  && echo "export JAVA_HOME=/opt/java/openjdk" >> /opt/hadoop/etc/hadoop/hadoop-env.sh
+#13 CACHED
+
+#14 [9/9] WORKDIR /home/hadoop
+#14 CACHED
+
+#15 exporting to image
+#15 exporting layers done
+#15 exporting manifest sha256:883c14bb79718e93f153da74c65256bfce2a107adf8a7011345b3cd16197c51f done
+#15 exporting config sha256:65f0adc97f08123ff246eae3a2a996e2fade5ad263ab525d7f9b633653b5befd
+#15 exporting config sha256:65f0adc97f08123ff246eae3a2a996e2fade5ad263ab525d7f9b633653b5befd done
+#15 exporting attestation manifest sha256:52dbb9139b1e54a17bc0ab5f1fa34582713d907051c6c5d9452e8d853f0bc5b9 0.0s done
+#15 exporting manifest list sha256:089a4da822545a7ce99ab94e3e483f6b1475c67a64059284ed6ee01399806af1 0.0s done
+#15 naming to docker.io/cst435/hadoop-spark:latest done
+#15 unpacking to docker.io/cst435/hadoop-spark:latest done
+#15 DONE 0.1s
+
+#16 resolving provenance for metadata file
+#16 DONE 0.0s
+ Image cst435/hadoop-spark:latest Built 
+ Network hadoop Creating 
+ Network hadoop Created 
+ Container master Creating 
+ Container master Created 
+ Container worker2 Creating 
+ Container worker1 Creating 
+ Container worker2 Created 
+ Container worker1 Created 
+ Container master Starting 
+ Container master Started 
+ Container worker2 Starting 
+ Container worker1 Starting 
+ Container worker2 Started 
+ Container worker1 Started 
+  ok: HDFS out of safe mode
+  ok: 2 live DataNodes
+  ok: 2 YARN NodeManagers
+cluster up: master + 2 worker(s)
+--- tier S: mr,mr_nocombiner,spark_rdd,spark_df x 3
+141.8 M  141.8 M  /input/S
+  mr             demand  S   n=2 rep=1     24.94s  ok
+  mr             demand  S   n=2 rep=2     21.60s  ok
+  mr             demand  S   n=2 rep=3     25.04s  ok
+  mr_nocombiner  demand  S   n=2 rep=1     25.62s  ok
+  mr_nocombiner  demand  S   n=2 rep=2     20.48s  ok
+  mr_nocombiner  demand  S   n=2 rep=3     25.87s  ok
+  spark_rdd      demand  S   n=2 rep=1     25.08s  ok
+  spark_rdd      demand  S   n=2 rep=2     19.18s  ok
+  spark_rdd      demand  S   n=2 rep=3     18.96s  ok
+  spark_df       demand  S   n=2 rep=1     19.27s  ok
+  spark_df       demand  S   n=2 rep=2     21.82s  ok
+  spark_df       demand  S   n=2 rep=3     20.88s  ok
+  mr             routes  S   n=2 rep=1     24.59s  ok
+  mr             routes  S   n=2 rep=2     23.52s  ok
+  mr             routes  S   n=2 rep=3     19.47s  ok
+  mr_nocombiner  routes  S   n=2 rep=1     23.54s  ok
+  mr_nocombiner  routes  S   n=2 rep=2     22.50s  ok
+  mr_nocombiner  routes  S   n=2 rep=3     25.07s  ok
+  spark_rdd      routes  S   n=2 rep=1     18.17s  ok
+  spark_rdd      routes  S   n=2 rep=2     19.24s  ok
+  spark_rdd      routes  S   n=2 rep=3     19.85s  ok
+  spark_df       routes  S   n=2 rep=1     19.65s  ok
+  spark_df       routes  S   n=2 rep=2     18.45s  ok
+  spark_df       routes  S   n=2 rep=3     16.35s  ok
+  mr             fare    S   n=2 rep=1     24.48s  ok
+  mr             fare    S   n=2 rep=2     21.50s  ok
+  mr             fare    S   n=2 rep=3     22.53s  ok
+  mr_nocombiner  fare    S   n=2 rep=1     23.59s  ok
+  mr_nocombiner  fare    S   n=2 rep=2     22.45s  ok
+  mr_nocombiner  fare    S   n=2 rep=3     26.64s  ok
+  spark_rdd      fare    S   n=2 rep=1     20.89s  ok
+  spark_rdd      fare    S   n=2 rep=2     20.06s  ok
+  spark_rdd      fare    S   n=2 rep=3     20.55s  ok
+  spark_df       fare    S   n=2 rep=1     19.04s  ok
+  spark_df       fare    S   n=2 rep=2     19.84s  ok
+  spark_df       fare    S   n=2 rep=3     21.31s  ok
+--- tier M: mr,mr_nocombiner,spark_rdd,spark_df x 3
+973.8 M  973.8 M  /input/M
+  mr             demand  M   n=2 rep=1     47.93s  ok
+  mr             demand  M   n=2 rep=2     48.87s  ok
+  mr             demand  M   n=2 rep=3     49.94s  ok
+  mr_nocombiner  demand  M   n=2 rep=1     47.84s  ok
+  mr_nocombiner  demand  M   n=2 rep=2     53.89s  ok
+  mr_nocombiner  demand  M   n=2 rep=3     49.92s  ok
+  spark_rdd      demand  M   n=2 rep=1     32.49s  ok
+  spark_rdd      demand  M   n=2 rep=2     31.48s  ok
+  spark_rdd      demand  M   n=2 rep=3     32.47s  ok
+  spark_df       demand  M   n=2 rep=1     28.24s  ok
+  spark_df       demand  M   n=2 rep=2     25.88s  ok
+  spark_df       demand  M   n=2 rep=3     28.18s  ok
+  mr             routes  M   n=2 rep=1     49.99s  ok
+  mr             routes  M   n=2 rep=2     48.83s  ok
+  mr             routes  M   n=2 rep=3     49.66s  ok
+  mr_nocombiner  routes  M   n=2 rep=1     54.77s  ok
+  mr_nocombiner  routes  M   n=2 rep=2     51.65s  ok
+  mr_nocombiner  routes  M   n=2 rep=3     48.54s  ok
+  spark_rdd      routes  M   n=2 rep=1     29.72s  ok
+  spark_rdd      routes  M   n=2 rep=2     35.46s  ok
+  spark_rdd      routes  M   n=2 rep=3          s  failed
+Error response from daemon: container 2c61538016722130638ccbf242c84b9b5248d2a523a75b632b6cbad0eb3cb429 is not running
+  spark_df       routes  M   n=2 rep=1          s  failed
+Error response from daemon: container 2c61538016722130638ccbf242c84b9b5248d2a523a75b632b6cbad0eb3cb429 is not running
+  spark_df       routes  M   n=2 rep=2          s  failed
+Error response from daemon: container 2c61538016722130638ccbf242c84b9b5248d2a523a75b632b6cbad0eb3cb429 is not running
+  spark_df       routes  M   n=2 rep=3          s  failed
+Error response from daemon: container 2c61538016722130638ccbf242c84b9b5248d2a523a75b632b6cbad0eb3cb429 is not running
+  mr             fare    M   n=2 rep=1          s  failed
+Error response from daemon: container 2c61538016722130638ccbf242c84b9b5248d2a523a75b632b6cbad0eb3cb429 is not running
+  mr             fare    M   n=2 rep=2          s  failed
+Error response from daemon: container 2c61538016722130638ccbf242c84b9b5248d2a523a75b632b6cbad0eb3cb429 is not running
+  mr             fare    M   n=2 rep=3          s  failed
+Error response from daemon: container 2c61538016722130638ccbf242c84b9b5248d2a523a75b632b6cbad0eb3cb429 is not running
+  mr_nocombiner  fare    M   n=2 rep=1          s  failed
+Error response from daemon: container 2c61538016722130638ccbf242c84b9b5248d2a523a75b632b6cbad0eb3cb429 is not running
+  mr_nocombiner  fare    M   n=2 rep=2          s  failed
+Error response from daemon: container 2c61538016722130638ccbf242c84b9b5248d2a523a75b632b6cbad0eb3cb429 is not running
+  mr_nocombiner  fare    M   n=2 rep=3          s  failed
+Error response from daemon: container 2c61538016722130638ccbf242c84b9b5248d2a523a75b632b6cbad0eb3cb429 is not running
+  spark_rdd      fare    M   n=2 rep=1          s  failed
+failed to connect to the docker API at npipe:////./pipe/dockerDesktopLinuxEngine; check if the path is correct and if the daemon is running: open //./pipe/dockerDesktopLinuxEngine: The system cannot find the file specified.
+  spark_rdd      fare    M   n=2 rep=2          s  failed
+failed to connect to the docker API at npipe:////./pipe/dockerDesktopLinuxEngine; check if the path is correct and if the daemon is running: open //./pipe/dockerDesktopLinuxEngine: The system cannot find the file specified.
+  spark_rdd      fare    M   n=2 rep=3          s  failed
+failed to connect to the docker API at npipe:////./pipe/dockerDesktopLinuxEngine; check if the path is correct and if the daemon is running: open //./pipe/dockerDesktopLinuxEngine: The system cannot find the file specified.
+  spark_df       fare    M   n=2 rep=1          s  failed
+failed to connect to the docker API at npipe:////./pipe/dockerDesktopLinuxEngine; check if the path is correct and if the daemon is running: open //./pipe/dockerDesktopLinuxEngine: The system cannot find the file specified.
+  spark_df       fare    M   n=2 rep=2          s  failed
+failed to connect to the docker API at npipe:////./pipe/dockerDesktopLinuxEngine; check if the path is correct and if the daemon is running: open //./pipe/dockerDesktopLinuxEngine: The system cannot find the file specified.
+  spark_df       fare    M   n=2 rep=3          s  failed
+--- tier L: mr,mr_nocombiner,spark_rdd,spark_df x 3
+failed to connect to the docker API at npipe:////./pipe/dockerDesktopLinuxEngine; check if the path is correct and if the daemon is running: open //./pipe/dockerDesktopLinuxEngine: The system cannot find the file specified.
+load failed for L
+=== 2026-11-24 16:22:52  cluster with 3 worker(s) ===
+ Image cst435/hadoop-spark:latest Building 
+failed to connect to the docker API at npipe:////./pipe/dockerDesktopLinuxEngine; check if the path is correct and if the daemon is running: open //./pipe/dockerDesktopLinuxEngine: The system cannot find the file specified.
+
+cluster start failed for n=3
+=== 2026-11-24 16:22:53  cluster with 3 worker(s) ===
+ Image cst435/hadoop-spark:latest Building 
+failed to connect to the docker API at npipe:////./pipe/dockerDesktopLinuxEngine; check if the path is correct and if the daemon is running: open //./pipe/dockerDesktopLinuxEngine: The system cannot find the file specified.
+
+cluster start failed for n=3
+=== 2026-11-24 16:22:54  cluster with 3 worker(s) ===
+ Image cst435/hadoop-spark:latest Building 
+failed to connect to the docker API at npipe:////./pipe/dockerDesktopLinuxEngine; check if the path is correct and if the daemon is running: open //./pipe/dockerDesktopLinuxEngine: The system cannot find the file specified.
+
+cluster start failed for n=3
+=== 2026-11-24 16:22:56  cluster with 3 worker(s) ===
+ Image cst435/hadoop-spark:latest Building 
+failed to connect to the docker API at npipe:////./pipe/dockerDesktopLinuxEngine; check if the path is correct and if the daemon is running: open //./pipe/dockerDesktopLinuxEngine: The system cannot find the file specified.
+
+cluster start failed for n=3
+=== 2026-11-24 16:22:57  cluster with 4 worker(s) ===
+ Image cst435/hadoop-spark:latest Building 
+failed to connect to the docker API at npipe:////./pipe/dockerDesktopLinuxEngine; check if the path is correct and if the daemon is running: open //./pipe/dockerDesktopLinuxEngine: The system cannot find the file specified.
+
+cluster start failed for n=4
+=== 2026-11-24 16:22:58  cluster with 4 worker(s) ===
+ Image cst435/hadoop-spark:latest Building 
+failed to connect to the docker API at npipe:////./pipe/dockerDesktopLinuxEngine; check if the path is correct and if the daemon is running: open //./pipe/dockerDesktopLinuxEngine: The system cannot find the file specified.
+
+cluster start failed for n=4
+=== 2026-11-24 16:22:59  cluster with 4 worker(s) ===
+ Image cst435/hadoop-spark:latest Building 
+failed to connect to the docker API at npipe:////./pipe/dockerDesktopLinuxEngine; check if the path is correct and if the daemon is running: open //./pipe/dockerDesktopLinuxEngine: The system cannot find the file specified.
+
+cluster start failed for n=4
+=== 2026-11-24 16:23:00  cluster with 4 worker(s) ===
+ Image cst435/hadoop-spark:latest Building 
+failed to connect to the docker API at npipe:////./pipe/dockerDesktopLinuxEngine; check if the path is correct and if the daemon is running: open //./pipe/dockerDesktopLinuxEngine: The system cannot find the file specified.
+
+cluster start failed for n=4
+=== 2026-11-24 16:23:01  plan finished; results in <repo>/results/benchmark.csv
+--- skip n=1 tier S (all runs done)
+--- skip n=1 tier W3 (all runs done)
+--- skip n=1 tier M (all runs done)
+--- skip n=1 tier L (all runs done)
+=== 2026-11-25 00:02:25  cluster with 1 worker(s) ===
+ Network hadoop Creating 
+ Network hadoop Created 
+ Container master Creating 
+ Container master Created 
+ Container worker1 Creating 
+ Container worker1 Created 
+ Container master Starting 
+ Container master Started 
+ Container worker1 Starting 
+ Container worker1 Started 
+  ok: HDFS out of safe mode
+  ok: 1 live DataNodes
+  ok: 1 YARN NodeManagers
+cluster up: master + 1 worker(s)
+--- tier XL: serial,mr,spark_df x 2
+3.7 G  3.7 G  /input/XL
+  serial         demand  XL  n=1 rep=1  (already done)
+  serial         demand  XL  n=1 rep=2  (already done)
+  mr             demand  XL  n=1 rep=1    380.14s  ok
+  mr             demand  XL  n=1 rep=2    401.12s  ok
+  spark_df       demand  XL  n=1 rep=1    135.15s  ok
+  spark_df       demand  XL  n=1 rep=2    101.61s  ok
+  serial         routes  XL  n=1 rep=1    168.92s  ok
+  serial         routes  XL  n=1 rep=2    173.74s  ok
+  mr             routes  XL  n=1 rep=1    330.71s  ok
+  mr             routes  XL  n=1 rep=2    325.72s  ok
+  spark_df       routes  XL  n=1 rep=1    104.06s  ok
+  spark_df       routes  XL  n=1 rep=2    110.72s  ok
+  serial         fare    XL  n=1 rep=1    204.90s  ok
+  serial         fare    XL  n=1 rep=2    185.91s  ok
+  mr             fare    XL  n=1 rep=1    481.12s  ok
+  mr             fare    XL  n=1 rep=2    417.05s  ok
+  spark_df       fare    XL  n=1 rep=1     91.11s  ok
+  spark_df       fare    XL  n=1 rep=2     81.78s  ok
+--- skip n=2 tier S (all runs done)
+=== 2026-11-25 01:13:12  cluster with 2 worker(s) ===
+ Network hadoop Creating 
+ Network hadoop Created 
+ Container master Creating 
+ Container master Created 
+ Container worker2 Creating 
+ Container worker1 Creating 
+ Container worker1 Created 
+ Container worker2 Created 
+ Container master Starting 
+ Container master Started 
+ Container worker2 Starting 
+ Container worker1 Starting 
+ Container worker2 Started 
+ Container worker1 Started 
+  ok: HDFS out of safe mode
+  ok: 2 live DataNodes
+  ok: 2 YARN NodeManagers
+cluster up: master + 2 worker(s)
+--- tier M: mr,mr_nocombiner,spark_rdd,spark_df x 3
+973.8 M  973.8 M  /input/M
+  mr             demand  M   n=2 rep=1  (already done)
+  mr             demand  M   n=2 rep=2  (already done)
+  mr             demand  M   n=2 rep=3  (already done)
+  mr_nocombiner  demand  M   n=2 rep=1  (already done)
+  mr_nocombiner  demand  M   n=2 rep=2  (already done)
+  mr_nocombiner  demand  M   n=2 rep=3  (already done)
+  spark_rdd      demand  M   n=2 rep=1  (already done)
+  spark_rdd      demand  M   n=2 rep=2  (already done)
+  spark_rdd      demand  M   n=2 rep=3  (already done)
+  spark_df       demand  M   n=2 rep=1  (already done)
+  spark_df       demand  M   n=2 rep=2  (already done)
+  spark_df       demand  M   n=2 rep=3  (already done)
+  mr             routes  M   n=2 rep=1  (already done)
+  mr             routes  M   n=2 rep=2  (already done)
+  mr             routes  M   n=2 rep=3  (already done)
+  mr_nocombiner  routes  M   n=2 rep=1  (already done)
+  mr_nocombiner  routes  M   n=2 rep=2  (already done)
+  mr_nocombiner  routes  M   n=2 rep=3  (already done)
+  spark_rdd      routes  M   n=2 rep=1  (already done)
+  spark_rdd      routes  M   n=2 rep=2  (already done)
+  spark_rdd      routes  M   n=2 rep=3     41.32s  ok
+  spark_df       routes  M   n=2 rep=1     25.20s  ok
+  spark_df       routes  M   n=2 rep=2     25.31s  ok
+  spark_df       routes  M   n=2 rep=3     26.94s  ok
+  mr             fare    M   n=2 rep=1     51.37s  ok
+  mr             fare    M   n=2 rep=2     57.28s  ok
+  mr             fare    M   n=2 rep=3     53.78s  ok
+  mr_nocombiner  fare    M   n=2 rep=1     63.48s  ok
+  mr_nocombiner  fare    M   n=2 rep=2     64.62s  ok
+  mr_nocombiner  fare    M   n=2 rep=3     59.21s  ok
+  spark_rdd      fare    M   n=2 rep=1     27.86s  ok
+  spark_rdd      fare    M   n=2 rep=2     26.97s  ok
+  spark_rdd      fare    M   n=2 rep=3     29.08s  ok
+  spark_df       fare    M   n=2 rep=1     25.00s  ok
+  spark_df       fare    M   n=2 rep=2     23.92s  ok
+  spark_df       fare    M   n=2 rep=3     24.36s  ok
+--- tier L: mr,mr_nocombiner,spark_rdd,spark_df x 3
+1.9 G  1.9 G  /input/L
+  mr             demand  L   n=2 rep=1    110.18s  ok
+  mr             demand  L   n=2 rep=2    112.87s  ok
+  mr             demand  L   n=2 rep=3    106.18s  ok
+  mr_nocombiner  demand  L   n=2 rep=1    167.15s  ok
+  mr_nocombiner  demand  L   n=2 rep=2    150.30s  ok
+  mr_nocombiner  demand  L   n=2 rep=3    121.67s  ok
+  spark_rdd      demand  L   n=2 rep=1     59.82s  ok
+  spark_rdd      demand  L   n=2 rep=2     50.64s  ok
+  spark_rdd      demand  L   n=2 rep=3     52.14s  ok
+  spark_df       demand  L   n=2 rep=1     40.36s  ok
+  spark_df       demand  L   n=2 rep=2     43.56s  ok
+  spark_df       demand  L   n=2 rep=3     45.65s  ok
+  mr             routes  L   n=2 rep=1    124.17s  ok
+  mr             routes  L   n=2 rep=2    147.52s  ok
+  mr             routes  L   n=2 rep=3    117.10s  ok
+  mr_nocombiner  routes  L   n=2 rep=1    108.02s  ok
+  mr_nocombiner  routes  L   n=2 rep=2    126.70s  ok
+  mr_nocombiner  routes  L   n=2 rep=3    137.38s  ok
+  spark_rdd      routes  L   n=2 rep=1     63.58s  ok
+  spark_rdd      routes  L   n=2 rep=2     74.32s  ok
+  spark_rdd      routes  L   n=2 rep=3     56.50s  ok
+  spark_df       routes  L   n=2 rep=1     56.00s  ok
+  spark_df       routes  L   n=2 rep=2     62.91s  ok
+  spark_df       routes  L   n=2 rep=3     58.11s  ok
+  mr             fare    L   n=2 rep=1    167.06s  ok
+  mr             fare    L   n=2 rep=2    169.77s  ok
+  mr             fare    L   n=2 rep=3    132.99s  ok
+  mr_nocombiner  fare    L   n=2 rep=1    182.36s  ok
+  mr_nocombiner  fare    L   n=2 rep=2    144.89s  ok
+  mr_nocombiner  fare    L   n=2 rep=3    165.37s  ok
+  spark_rdd      fare    L   n=2 rep=1     58.24s  ok
+  spark_rdd      fare    L   n=2 rep=2     53.89s  ok
+  spark_rdd      fare    L   n=2 rep=3     53.77s  ok
+  spark_df       fare    L   n=2 rep=1     44.32s  ok
+  spark_df       fare    L   n=2 rep=2     52.77s  ok
+  spark_df       fare    L   n=2 rep=3     43.61s  ok
+=== 2026-11-25 02:29:52  cluster with 3 worker(s) ===
+ Network hadoop Creating 
+ Network hadoop Created 
+ Container master Creating 
+ Container master Created 
+ Container worker3 Creating 
+ Container worker1 Creating 
+ Container worker2 Creating 
+ Container worker3 Created 
+ Container worker1 Created 
+ Container worker2 Created 
+ Container master Starting 
+ Container master Started 
+ Container worker3 Starting 
+ Container worker2 Starting 
+ Container worker1 Starting 
+ Container worker3 Started 
+ Container worker2 Started 
+ Container worker1 Started 
+  ok: HDFS out of safe mode
+  ok: 3 live DataNodes
+  ok: 3 YARN NodeManagers
+cluster up: master + 3 worker(s)
+--- tier S: mr,mr_nocombiner,spark_rdd,spark_df x 3
+141.8 M  141.8 M  /input/S
+  mr             demand  S   n=3 rep=1     34.88s  ok
+  mr             demand  S   n=3 rep=2     26.45s  ok
+  mr             demand  S   n=3 rep=3     19.26s  ok
+  mr_nocombiner  demand  S   n=3 rep=1     24.13s  ok
+  mr_nocombiner  demand  S   n=3 rep=2     27.11s  ok
+  mr_nocombiner  demand  S   n=3 rep=3     22.81s  ok
+  spark_rdd      demand  S   n=3 rep=1     28.08s  ok
+  spark_rdd      demand  S   n=3 rep=2     19.75s  ok
+  spark_rdd      demand  S   n=3 rep=3     19.58s  ok
+  spark_df       demand  S   n=3 rep=1     21.53s  ok
+  spark_df       demand  S   n=3 rep=2     16.94s  ok
+  spark_df       demand  S   n=3 rep=3     18.59s  ok
+  mr             routes  S   n=3 rep=1     25.67s  ok
+  mr             routes  S   n=3 rep=2     24.34s  ok
+  mr             routes  S   n=3 rep=3     24.87s  ok
+  mr_nocombiner  routes  S   n=3 rep=1     25.26s  ok
+  mr_nocombiner  routes  S   n=3 rep=2     25.34s  ok
+  mr_nocombiner  routes  S   n=3 rep=3     24.26s  ok
+  spark_rdd      routes  S   n=3 rep=1     19.89s  ok
+  spark_rdd      routes  S   n=3 rep=2     19.24s  ok
+  spark_rdd      routes  S   n=3 rep=3     19.63s  ok
+  spark_df       routes  S   n=3 rep=1     20.91s  ok
+  spark_df       routes  S   n=3 rep=2     18.41s  ok
+  spark_df       routes  S   n=3 rep=3     19.10s  ok
+  mr             fare    S   n=3 rep=1     26.35s  ok
+  mr             fare    S   n=3 rep=2     24.05s  ok
+  mr             fare    S   n=3 rep=3     29.85s  ok
+  mr_nocombiner  fare    S   n=3 rep=1     25.36s  ok
+  mr_nocombiner  fare    S   n=3 rep=2     25.56s  ok
+  mr_nocombiner  fare    S   n=3 rep=3     26.29s  ok
+  spark_rdd      fare    S   n=3 rep=1     21.20s  ok
+  spark_rdd      fare    S   n=3 rep=2     19.22s  ok
+  spark_rdd      fare    S   n=3 rep=3     20.07s  ok
+  spark_df       fare    S   n=3 rep=1     20.12s  ok
+  spark_df       fare    S   n=3 rep=2     18.69s  ok
+  spark_df       fare    S   n=3 rep=3     16.78s  ok
+--- tier M: mr,mr_nocombiner,spark_rdd,spark_df x 3
+973.8 M  973.8 M  /input/M
+  mr             demand  M   n=3 rep=1     35.30s  ok
+  mr             demand  M   n=3 rep=2     40.34s  ok
+  mr             demand  M   n=3 rep=3     41.65s  ok
+  mr_nocombiner  demand  M   n=3 rep=1     39.82s  ok
+  mr_nocombiner  demand  M   n=3 rep=2     41.54s  ok
+  mr_nocombiner  demand  M   n=3 rep=3     43.66s  ok
+  spark_rdd      demand  M   n=3 rep=1     29.59s  ok
+  spark_rdd      demand  M   n=3 rep=2     28.58s  ok
+  spark_rdd      demand  M   n=3 rep=3     28.72s  ok
+  spark_df       demand  M   n=3 rep=1     30.15s  ok
+  spark_df       demand  M   n=3 rep=2     26.98s  ok
+  spark_df       demand  M   n=3 rep=3     28.62s  ok
+  mr             routes  M   n=3 rep=1     45.71s  ok
+  mr             routes  M   n=3 rep=2     42.45s  ok
+  mr             routes  M   n=3 rep=3     42.49s  ok
+  mr_nocombiner  routes  M   n=3 rep=1     39.57s  ok
+  mr_nocombiner  routes  M   n=3 rep=2     42.05s  ok
+  mr_nocombiner  routes  M   n=3 rep=3     47.54s  ok
+  spark_rdd      routes  M   n=3 rep=1     26.42s  ok
+  spark_rdd      routes  M   n=3 rep=2     25.41s  ok
+  spark_rdd      routes  M   n=3 rep=3     25.29s  ok
+  spark_df       routes  M   n=3 rep=1     24.49s  ok
+  spark_df       routes  M   n=3 rep=2     26.25s  ok
+  spark_df       routes  M   n=3 rep=3     21.47s  ok
+  mr             fare    M   n=3 rep=1     45.39s  ok
+  mr             fare    M   n=3 rep=2     39.82s  ok
+  mr             fare    M   n=3 rep=3     40.26s  ok
+  mr_nocombiner  fare    M   n=3 rep=1     46.84s  ok
+  mr_nocombiner  fare    M   n=3 rep=2     50.45s  ok
+  mr_nocombiner  fare    M   n=3 rep=3     49.93s  ok
+  spark_rdd      fare    M   n=3 rep=1     26.10s  ok
+  spark_rdd      fare    M   n=3 rep=2     26.26s  ok
+  spark_rdd      fare    M   n=3 rep=3     25.32s  ok
+  spark_df       fare    M   n=3 rep=1     29.04s  ok
+  spark_df       fare    M   n=3 rep=2     28.15s  ok
+  spark_df       fare    M   n=3 rep=3     30.97s  ok
+--- tier W9: mr,mr_nocombiner,spark_rdd,spark_df x 3
+1.4 G  1.4 G  /input/W9
+  mr             demand  W9  n=3 rep=1     57.19s  ok
+  mr             demand  W9  n=3 rep=2     47.30s  ok
+  mr             demand  W9  n=3 rep=3     48.78s  ok
+  mr_nocombiner  demand  W9  n=3 rep=1     54.70s  ok
+  mr_nocombiner  demand  W9  n=3 rep=2     54.97s  ok
+  mr_nocombiner  demand  W9  n=3 rep=3     55.99s  ok
+  spark_rdd      demand  W9  n=3 rep=1     37.91s  ok
+  spark_rdd      demand  W9  n=3 rep=2     35.60s  ok
+  spark_rdd      demand  W9  n=3 rep=3     36.79s  ok
+  spark_df       demand  W9  n=3 rep=1     28.77s  ok
+  spark_df       demand  W9  n=3 rep=2     28.10s  ok
+  spark_df       demand  W9  n=3 rep=3     29.21s  ok
+  mr             routes  W9  n=3 rep=1     63.62s  ok
+  mr             routes  W9  n=3 rep=2     55.35s  ok
+  mr             routes  W9  n=3 rep=3     56.03s  ok
+  mr_nocombiner  routes  W9  n=3 rep=1     54.85s  ok
+  mr_nocombiner  routes  W9  n=3 rep=2     56.44s  ok
+  mr_nocombiner  routes  W9  n=3 rep=3     56.06s  ok
+  spark_rdd      routes  W9  n=3 rep=1     35.76s  ok
+  spark_rdd      routes  W9  n=3 rep=2     34.40s  ok
+  spark_rdd      routes  W9  n=3 rep=3     37.04s  ok
+  spark_df       routes  W9  n=3 rep=1     28.00s  ok
+  spark_df       routes  W9  n=3 rep=2     25.87s  ok
+  spark_df       routes  W9  n=3 rep=3     27.36s  ok
+  mr             fare    W9  n=3 rep=1     50.53s  ok
+  mr             fare    W9  n=3 rep=2     57.03s  ok
+  mr             fare    W9  n=3 rep=3     53.70s  ok
+  mr_nocombiner  fare    W9  n=3 rep=1     68.53s  ok
+  mr_nocombiner  fare    W9  n=3 rep=2     66.07s  ok
+  mr_nocombiner  fare    W9  n=3 rep=3     66.63s  ok
+  spark_rdd      fare    W9  n=3 rep=1     31.81s  ok
+  spark_rdd      fare    W9  n=3 rep=2     31.64s  ok
+  spark_rdd      fare    W9  n=3 rep=3     31.65s  ok
+  spark_df       fare    W9  n=3 rep=1     29.93s  ok
+  spark_df       fare    W9  n=3 rep=2     29.19s  ok
+  spark_df       fare    W9  n=3 rep=3     30.55s  ok
+--- tier L: mr,mr_nocombiner,spark_rdd,spark_df x 3
+1.9 G  1.9 G  /input/L
+  mr             demand  L   n=3 rep=1     59.79s  ok
+  mr             demand  L   n=3 rep=2     62.12s  ok
+  mr             demand  L   n=3 rep=3     61.64s  ok
+  mr_nocombiner  demand  L   n=3 rep=1     67.73s  ok
+  mr_nocombiner  demand  L   n=3 rep=2     65.52s  ok
+  mr_nocombiner  demand  L   n=3 rep=3     63.65s  ok
+  spark_rdd      demand  L   n=3 rep=1     37.21s  ok
+  spark_rdd      demand  L   n=3 rep=2     36.10s  ok
+  spark_rdd      demand  L   n=3 rep=3     37.36s  ok
+  spark_df       demand  L   n=3 rep=1     29.14s  ok
+  spark_df       demand  L   n=3 rep=2     28.19s  ok
+  spark_df       demand  L   n=3 rep=3     28.18s  ok
+  mr             routes  L   n=3 rep=1     60.65s  ok
+  mr             routes  L   n=3 rep=2     66.61s  ok
+  mr             routes  L   n=3 rep=3     67.78s  ok
+  mr_nocombiner  routes  L   n=3 rep=1     63.78s  ok
+  mr_nocombiner  routes  L   n=3 rep=2     64.20s  ok
+  mr_nocombiner  routes  L   n=3 rep=3     71.68s  ok
+  spark_rdd      routes  L   n=3 rep=1     37.82s  ok
+  spark_rdd      routes  L   n=3 rep=2     37.86s  ok
+  spark_rdd      routes  L   n=3 rep=3     37.62s  ok
+  spark_df       routes  L   n=3 rep=1     29.82s  ok
+  spark_df       routes  L   n=3 rep=2     28.60s  ok
+  spark_df       routes  L   n=3 rep=3     28.09s  ok
+  mr             fare    L   n=3 rep=1     68.74s  ok
+  mr             fare    L   n=3 rep=2     73.75s  ok
+  mr             fare    L   n=3 rep=3     83.74s  ok
+  mr_nocombiner  fare    L   n=3 rep=1     95.61s  ok
+  mr_nocombiner  fare    L   n=3 rep=2     81.73s  ok
+  mr_nocombiner  fare    L   n=3 rep=3     83.59s  ok
+  spark_rdd      fare    L   n=3 rep=1     36.70s  ok
+  spark_rdd      fare    L   n=3 rep=2     36.35s  ok
+  spark_rdd      fare    L   n=3 rep=3     35.81s  ok
+  spark_df       fare    L   n=3 rep=1     29.28s  ok
+  spark_df       fare    L   n=3 rep=2     29.14s  ok
+  spark_df       fare    L   n=3 rep=3     29.22s  ok
+=== 2026-11-25 04:15:20  cluster with 4 worker(s) ===
+ Network hadoop Creating 
+ Network hadoop Created 
+ Container master Creating 
+ Container master Created 
+ Container worker4 Creating 
+ Container worker3 Creating 
+ Container worker2 Creating 
+ Container worker1 Creating 
+ Container worker3 Created 
+ Container worker4 Created 
+ Container worker2 Created 
+ Container worker1 Created 
+ Container master Starting 
+ Container master Started 
+ Container worker4 Starting 
+ Container worker3 Starting 
+ Container worker1 Starting 
+ Container worker2 Starting 
+ Container worker4 Started 
+ Container worker3 Started 
+ Container worker1 Started 
+ Container worker2 Started 
+  ok: HDFS out of safe mode
+  ok: 4 live DataNodes
+  ok: 4 YARN NodeManagers
+cluster up: master + 4 worker(s)
+--- tier S: mr,mr_nocombiner,spark_rdd,spark_df x 3
+141.8 M  141.8 M  /input/S
+  mr             demand  S   n=4 rep=1     28.62s  ok
+  mr             demand  S   n=4 rep=2     21.31s  ok
+  mr             demand  S   n=4 rep=3     26.42s  ok
+  mr_nocombiner  demand  S   n=4 rep=1     24.32s  ok
+  mr_nocombiner  demand  S   n=4 rep=2     25.42s  ok
+  mr_nocombiner  demand  S   n=4 rep=3     21.30s  ok
+  spark_rdd      demand  S   n=4 rep=1     25.41s  ok
+  spark_rdd      demand  S   n=4 rep=2     20.04s  ok
+  spark_rdd      demand  S   n=4 rep=3     19.57s  ok
+  spark_df       demand  S   n=4 rep=1     19.21s  ok
+  spark_df       demand  S   n=4 rep=2     19.88s  ok
+  spark_df       demand  S   n=4 rep=3     18.95s  ok
+  mr             routes  S   n=4 rep=1     22.40s  ok
+  mr             routes  S   n=4 rep=2     25.30s  ok
+  mr             routes  S   n=4 rep=3     24.31s  ok
+  mr_nocombiner  routes  S   n=4 rep=1     25.40s  ok
+  mr_nocombiner  routes  S   n=4 rep=2     24.30s  ok
+  mr_nocombiner  routes  S   n=4 rep=3     24.43s  ok
+  spark_rdd      routes  S   n=4 rep=1     19.82s  ok
+  spark_rdd      routes  S   n=4 rep=2     19.98s  ok
+  spark_rdd      routes  S   n=4 rep=3     20.55s  ok
+  spark_df       routes  S   n=4 rep=1     19.76s  ok
+  spark_df       routes  S   n=4 rep=2     19.06s  ok
+  spark_df       routes  S   n=4 rep=3     19.35s  ok
+  mr             fare    S   n=4 rep=1     25.39s  ok
+  mr             fare    S   n=4 rep=2     26.34s  ok
+  mr             fare    S   n=4 rep=3     25.28s  ok
+  mr_nocombiner  fare    S   n=4 rep=1     25.36s  ok
+  mr_nocombiner  fare    S   n=4 rep=2     25.34s  ok
+  mr_nocombiner  fare    S   n=4 rep=3     23.32s  ok
+  spark_rdd      fare    S   n=4 rep=1     21.24s  ok
+  spark_rdd      fare    S   n=4 rep=2     19.48s  ok
+  spark_rdd      fare    S   n=4 rep=3     21.20s  ok
+  spark_df       fare    S   n=4 rep=1     18.66s  ok
+  spark_df       fare    S   n=4 rep=2     19.87s  ok
+  spark_df       fare    S   n=4 rep=3     18.93s  ok
+--- tier M: mr,mr_nocombiner,spark_rdd,spark_df x 3
+973.8 M  973.8 M  /input/M
+  mr             demand  M   n=4 rep=1     36.46s  ok
+  mr             demand  M   n=4 rep=2     37.57s  ok
+  mr             demand  M   n=4 rep=3     35.60s  ok
+  mr_nocombiner  demand  M   n=4 rep=1     38.60s  ok
+  mr_nocombiner  demand  M   n=4 rep=2     37.50s  ok
+  mr_nocombiner  demand  M   n=4 rep=3     36.55s  ok
+  spark_rdd      demand  M   n=4 rep=1     24.37s  ok
+  spark_rdd      demand  M   n=4 rep=2     24.46s  ok
+  spark_rdd      demand  M   n=4 rep=3     23.66s  ok
+  spark_df       demand  M   n=4 rep=1     22.02s  ok
+  spark_df       demand  M   n=4 rep=2     21.88s  ok
+  spark_df       demand  M   n=4 rep=3     22.59s  ok
+  mr             routes  M   n=4 rep=1     37.52s  ok
+  mr             routes  M   n=4 rep=2     36.48s  ok
+  mr             routes  M   n=4 rep=3     37.59s  ok
+  mr_nocombiner  routes  M   n=4 rep=1     39.50s  ok
+  mr_nocombiner  routes  M   n=4 rep=2     38.52s  ok
+  mr_nocombiner  routes  M   n=4 rep=3     36.54s  ok
+  spark_rdd      routes  M   n=4 rep=1     23.45s  ok
+  spark_rdd      routes  M   n=4 rep=2     24.62s  ok
+  spark_rdd      routes  M   n=4 rep=3     24.35s  ok
+  spark_df       routes  M   n=4 rep=1     22.51s  ok
+  spark_df       routes  M   n=4 rep=2     22.82s  ok
+  spark_df       routes  M   n=4 rep=3     23.71s  ok
+  mr             fare    M   n=4 rep=1     42.58s  ok
+  mr             fare    M   n=4 rep=2     41.53s  ok
+  mr             fare    M   n=4 rep=3     39.46s  ok
+  mr_nocombiner  fare    M   n=4 rep=1     48.52s  ok
+  mr_nocombiner  fare    M   n=4 rep=2     50.50s  ok
+  mr_nocombiner  fare    M   n=4 rep=3     48.65s  ok
+  spark_rdd      fare    M   n=4 rep=1     24.07s  ok
+  spark_rdd      fare    M   n=4 rep=2     23.57s  ok
+  spark_rdd      fare    M   n=4 rep=3     23.18s  ok
+  spark_df       fare    M   n=4 rep=1     22.77s  ok
+  spark_df       fare    M   n=4 rep=2     21.67s  ok
+  spark_df       fare    M   n=4 rep=3     22.39s  ok
+--- tier L: mr,mr_nocombiner,spark_rdd,spark_df x 3
+1.9 G  1.9 G  /input/L
+  mr             demand  L   n=4 rep=1     55.13s  ok
+  mr             demand  L   n=4 rep=2     59.80s  ok
+  mr             demand  L   n=4 rep=3     61.11s  ok
+  mr_nocombiner  demand  L   n=4 rep=1     57.72s  ok
+  mr_nocombiner  demand  L   n=4 rep=2     58.73s  ok
+  mr_nocombiner  demand  L   n=4 rep=3     59.79s  ok
+  spark_rdd      demand  L   n=4 rep=1     35.25s  ok
+  spark_rdd      demand  L   n=4 rep=2     35.52s  ok
+  spark_rdd      demand  L   n=4 rep=3     35.91s  ok
+  spark_df       demand  L   n=4 rep=1     28.70s  ok
+  spark_df       demand  L   n=4 rep=2     28.05s  ok
+  spark_df       demand  L   n=4 rep=3     28.86s  ok
+  mr             routes  L   n=4 rep=1     59.84s  ok
+  mr             routes  L   n=4 rep=2     63.88s  ok
+  mr             routes  L   n=4 rep=3     60.84s  ok
+  mr_nocombiner  routes  L   n=4 rep=1     60.85s  ok
+  mr_nocombiner  routes  L   n=4 rep=2     66.80s  ok
+  mr_nocombiner  routes  L   n=4 rep=3     59.76s  ok
+  spark_rdd      routes  L   n=4 rep=1     36.60s  ok
+  spark_rdd      routes  L   n=4 rep=2     36.48s  ok
+  spark_rdd      routes  L   n=4 rep=3     36.61s  ok
+  spark_df       routes  L   n=4 rep=1     27.73s  ok
+  spark_df       routes  L   n=4 rep=2     29.29s  ok
+  spark_df       routes  L   n=4 rep=3     29.57s  ok
+  mr             fare    L   n=4 rep=1     60.82s  ok
+  mr             fare    L   n=4 rep=2     63.81s  ok
+  mr             fare    L   n=4 rep=3     66.82s  ok
+  mr_nocombiner  fare    L   n=4 rep=1     78.89s  ok
+  mr_nocombiner  fare    L   n=4 rep=2     79.90s  ok
+  mr_nocombiner  fare    L   n=4 rep=3     80.98s  ok
+  spark_rdd      fare    L   n=4 rep=1     34.61s  ok
+  spark_rdd      fare    L   n=4 rep=2     35.62s  ok
+  spark_rdd      fare    L   n=4 rep=3     33.72s  ok
+  spark_df       fare    L   n=4 rep=1     29.24s  ok
+  spark_df       fare    L   n=4 rep=2     28.10s  ok
+  spark_df       fare    L   n=4 rep=3     30.43s  ok
+--- tier XL: mr,spark_df x 2
+3.7 G  3.7 G  /input/XL
+  mr             demand  XL  n=4 rep=1     96.75s  ok
+  mr             demand  XL  n=4 rep=2    100.00s  ok
+  spark_df       demand  XL  n=4 rep=1     38.08s  ok
+  spark_df       demand  XL  n=4 rep=2     39.64s  ok
+  mr             routes  XL  n=4 rep=1     96.10s  ok
+  mr             routes  XL  n=4 rep=2     99.90s  ok
+  spark_df       routes  XL  n=4 rep=1     38.56s  ok
+  spark_df       routes  XL  n=4 rep=2     37.62s  ok
+  mr             fare    XL  n=4 rep=1    118.14s  ok
+  mr             fare    XL  n=4 rep=2    116.95s  ok
+  spark_df       fare    XL  n=4 rep=1     39.21s  ok
+  spark_df       fare    XL  n=4 rep=2     37.51s  ok
+=== 2026-11-25 05:43:30  plan finished; results in <repo>/results/benchmark.csv

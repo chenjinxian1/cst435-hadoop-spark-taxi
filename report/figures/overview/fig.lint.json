@@ -1,0 +1,24 @@
+{
+ "svg": "fig.svg",
+ "spec": "spec.json",
+ "width": 246.0,
+ "height": 190.0,
+ "errors": 0,
+ "warnings": 1,
+ "findings": [
+  {
+   "severity": "warn",
+   "code": "spec.edge",
+   "message": "e:e-output data-from=tasks~2 but spec says tasks",
+   "elements": [],
+   "bbox": null
+  },
+  {
+   "severity": "info",
+   "code": "density.nodes",
+   "message": "14 labelled boxes is above the single-column q3 budget 13",
+   "elements": [],
+   "bbox": null
+  }
+ ]
+}

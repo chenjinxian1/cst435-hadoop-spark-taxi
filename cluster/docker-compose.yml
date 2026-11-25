@@ -1,0 +1,52 @@
+# Hadoop + Spark-on-YARN cluster: 1 master + up to 4 identical workers.
+#
+# Every worker is capped at the SAME resources (2 CPUs, 5 GB RAM) so that
+# "1 worker" vs "N workers" is a fair comparison on a single host.
+# Without these caps a single container could already use all host cores.
+#
+# Start with N workers, e.g. N=2:
+#   docker compose up -d master worker1 worker2
+# (scripts/cluster.sh does this and waits until all nodes are registered.)
+
+x-node: &node
+  image: cst435/hadoop-spark:latest
+  pull_policy: never               # built locally from ./Dockerfile (see master)
+  networks: [hadoop]
+  volumes:
+    - ../code:/opt/job:ro          # our mapper/reducer/spark jobs
+    - ../scripts:/opt/scripts:ro   # run_job.sh (timed job runner)
+    - ../data/csv:/data/csv:ro     # prepared CSV input (host side)
+    - ../results:/results          # benchmark output
+  environment:
+    - TZ=Asia/Kuala_Lumpur
+
+x-worker: &worker
+  <<: *node
+  command: ["worker"]
+  cpus: 2.0
+  mem_limit: 5g
+  depends_on: [master]
+
+services:
+  master:
+    <<: *node
+    build: .
+    hostname: master
+    container_name: master
+    command: ["master"]
+    cpus: 2.0
+    mem_limit: 4g
+    ports:
+      - "9870:9870"   # HDFS NameNode web UI
+      - "8088:8088"   # YARN ResourceManager web UI
+      - "19888:19888" # MapReduce JobHistory web UI
+      - "4040:4040"   # Spark driver UI (while a job runs)
+
+  worker1: { <<: *worker, hostname: worker1, container_name: worker1 }
+  worker2: { <<: *worker, hostname: worker2, container_name: worker2 }
+  worker3: { <<: *worker, hostname: worker3, container_name: worker3 }
+  worker4: { <<: *worker, hostname: worker4, container_name: worker4 }
+
+networks:
+  hadoop:
+    name: hadoop

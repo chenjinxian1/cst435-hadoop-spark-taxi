@@ -1,0 +1,85 @@
+packageJobJar: [/tmp/hadoop-unjar10892081074152418043/] [] /tmp/streamjob11488893307406464684.jar tmpDir=null
+2026-11-24 13:22:25,533 INFO client.DefaultNoHARMFailoverProxyProvider: Connecting to ResourceManager at master/10.10.1.4:8032
+2026-11-24 13:22:25,781 INFO client.DefaultNoHARMFailoverProxyProvider: Connecting to ResourceManager at master/10.10.1.4:8032
+2026-11-24 13:22:26,054 INFO mapreduce.JobResourceUploader: Disabling Erasure Coding for path: /tmp/hadoop-yarn/staging/hadoop/.staging/job_1795496963748_0012
+2026-11-24 13:22:26,942 INFO mapred.FileInputFormat: Total input files to process : 1
+2026-11-24 13:22:26,947 INFO net.NetworkTopology: Adding a new node: /default-rack/10.10.1.5:9866
+2026-11-24 13:22:27,001 INFO mapreduce.JobSubmitter: number of splits:2
+2026-11-24 13:22:27,663 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1795496963748_0012
+2026-11-24 13:22:27,663 INFO mapreduce.JobSubmitter: Executing with tokens: []
+2026-11-24 13:22:27,855 INFO conf.Configuration: resource-types.xml not found
+2026-11-24 13:22:27,856 INFO resource.ResourceUtils: Unable to find 'resource-types.xml'.
+2026-11-24 13:22:27,915 INFO impl.YarnClientImpl: Submitted application application_1795496963748_0012
+2026-11-24 13:22:27,945 INFO mapreduce.Job: The url to track the job: http://master:8088/proxy/application_1795496963748_0012/
+2026-11-24 13:22:27,947 INFO mapreduce.Job: Running job: job_1795496963748_0012
+2026-11-24 13:22:37,074 INFO mapreduce.Job: Job job_1795496963748_0012 running in uber mode : false
+2026-11-24 13:22:37,075 INFO mapreduce.Job:  map 0% reduce 0%
+2026-11-24 13:22:57,373 INFO mapreduce.Job:  map 59% reduce 0%
+2026-11-24 13:23:03,465 INFO mapreduce.Job:  map 67% reduce 0%
+2026-11-24 13:23:06,512 INFO mapreduce.Job:  map 100% reduce 0%
+2026-11-24 13:23:16,628 INFO mapreduce.Job:  map 100% reduce 50%
+2026-11-24 13:23:17,634 INFO mapreduce.Job:  map 100% reduce 100%
+2026-11-24 13:23:17,645 INFO mapreduce.Job: Job job_1795496963748_0012 completed successfully
+2026-11-24 13:23:17,735 INFO mapreduce.Job: Counters: 55
+	File System Counters
+		FILE: Number of bytes read=491416
+		FILE: Number of bytes written=2239214
+		FILE: Number of read operations=0
+		FILE: Number of large read operations=0
+		FILE: Number of write operations=0
+		HDFS: Number of bytes read=145757311
+		HDFS: Number of bytes written=265266
+		HDFS: Number of read operations=16
+		HDFS: Number of large read operations=0
+		HDFS: Number of write operations=4
+		HDFS: Number of bytes read erasure-coded=0
+	Job Counters 
+		Killed reduce tasks=1
+		Launched map tasks=2
+		Launched reduce tasks=2
+		Data-local map tasks=2
+		Total time spent by all maps in occupied slots (ms)=109414
+		Total time spent by all reduces in occupied slots (ms)=30538
+		Total time spent by all map tasks (ms)=54707
+		Total time spent by all reduce tasks (ms)=15269
+		Total vcore-milliseconds taken by all map tasks=54707
+		Total vcore-milliseconds taken by all reduce tasks=15269
+		Total megabyte-milliseconds taken by all map tasks=56019968
+		Total megabyte-milliseconds taken by all reduce tasks=15635456
+	Map-Reduce Framework
+		Map input records=2964624
+		Map output records=2869657
+		Map output bytes=28696570
+		Map output materialized bytes=491428
+		Input split bytes=180
+		Combine input records=2869657
+		Combine output records=39625
+		Reduce input groups=25455
+		Reduce shuffle bytes=491428
+		Reduce input records=39625
+		Reduce output records=25455
+		Spilled Records=79250
+		Shuffled Maps =4
+		Failed Shuffles=0
+		Merged Map outputs=4
+		GC time elapsed (ms)=451
+		CPU time spent (ms)=37690
+		Physical memory (bytes) snapshot=1120710656
+		Virtual memory (bytes) snapshot=10234802176
+		Total committed heap usage (bytes)=859832320
+		Peak Map Physical memory (bytes)=354099200
+		Peak Map Virtual memory (bytes)=2578948096
+		Peak Reduce Physical memory (bytes)=225898496
+		Peak Reduce Virtual memory (bytes)=2562359296
+	Shuffle Errors
+		BAD_ID=0
+		CONNECTION=0
+		IO_ERROR=0
+		WRONG_LENGTH=0
+		WRONG_MAP=0
+		WRONG_REDUCE=0
+	File Input Format Counters 
+		Bytes Read=145757131
+	File Output Format Counters 
+		Bytes Written=265266
+2026-11-24 13:23:17,736 INFO streaming.StreamJob: Output directory: /out/mr-routes-S

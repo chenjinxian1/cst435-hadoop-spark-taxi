@@ -1,0 +1,13 @@
+data/
+results/outputs/
+results/logs/
+report/*.aux
+report/*.log
+report/*.out
+report/*.bbl
+report/*.blg
+report/*.fls
+report/*.fdb_latexmk
+report/*.synctex.gz
+report/main.pdf
+__pycache__/

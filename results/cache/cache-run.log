@@ -1,0 +1,402 @@
+=== 2026-11-25 11:49:29  cluster with 1 worker(s), tier L ===
+ Network hadoop Creating 
+ Network hadoop Created 
+ Container master Creating 
+ Container master Created 
+ Container worker1 Creating 
+ Container worker1 Created 
+ Container master Starting 
+ Container master Started 
+ Container worker1 Starting 
+ Container worker1 Started 
+  ok: HDFS out of safe mode
+  ok: 1 live DataNodes
+  ok: 1 YARN NodeManagers
+cluster up: master + 1 worker(s)
+1.9 G  1.9 G  /input/L
+  HDFS data per worker (MiB): 2315
+  mr        n=1 rep=1 cold  143.01s  disk read   2013 MiB  refault      0 MiB  cache peak  2026 MiB  anon peak  1526 MiB
+  mr        n=1 rep=1 warm  141.88s  disk read      0 MiB  refault      0 MiB  cache peak  2029 MiB  anon peak  1591 MiB
+scripts/cache_experiment.sh: line 56: 4.55628e+09: syntax error: invalid arithmetic operator (error token is ".55628e+09")
+=== 2026-11-25 11:59:25  cache experiment finished; results in <repo>/results/cache/cache_runs.csv
+=== 2026-11-25 12:01:10  cluster with 1 worker(s), tier L ===
+ Network hadoop Creating 
+ Network hadoop Created 
+ Container master Creating 
+ Container master Created 
+ Container worker1 Creating 
+ Container worker1 Created 
+ Container master Starting 
+ Container master Started 
+ Container worker1 Starting 
+ Container worker1 Started 
+  ok: HDFS out of safe mode
+  ok: 1 live DataNodes
+  ok: 1 YARN NodeManagers
+cluster up: master + 1 worker(s)
+1.9 G  1.9 G  /input/L
+  HDFS data per worker (MiB): 2315
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+  mr        n=1 rep=1 cold  148.82s  disk read  2013 MiB  refault     0 MiB  cache peak  2029 MiB  anon peak  1518 MiB  CPU %              throttled 105s
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+  mr        n=1 rep=1 warm  150.99s  disk read     0 MiB  refault     0 MiB  cache peak  2029 MiB  anon peak  1472 MiB  CPU %              throttled 113s
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+  spark_df  n=1 rep=1 cold   50.37s  disk read  2320 MiB  refault     0 MiB  cache peak  2662 MiB  anon peak  1682 MiB  CPU %              throttled 20s
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+  spark_df  n=1 rep=1 warm   50.48s  disk read     0 MiB  refault     0 MiB  cache peak  2665 MiB  anon peak  1533 MiB  CPU %              throttled 9s
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+  mr        n=1 rep=2 cold  150.75s  disk read  2011 MiB  refault     0 MiB  cache peak  2027 MiB  anon peak  1557 MiB  CPU %              throttled 117s
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+  mr        n=1 rep=2 warm  144.75s  disk read     0 MiB  refault     0 MiB  cache peak  2027 MiB  anon peak  1569 MiB  CPU %              throttled 101s
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+  spark_df  n=1 rep=2 cold   50.04s  disk read  2057 MiB  refault     0 MiB  cache peak  2073 MiB  anon peak  1577 MiB  CPU %              throttled 7s
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+  spark_df  n=1 rep=2 warm   48.61s  disk read     0 MiB  refault     0 MiB  cache peak  2075 MiB  anon peak  1482 MiB  CPU %              throttled 8s
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+  mr        n=1 rep=3 cold  150.39s  disk read  2011 MiB  refault     0 MiB  cache peak  2027 MiB  anon peak  1567 MiB  CPU %              throttled 114s
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+  mr        n=1 rep=3 warm  141.06s  disk read     0 MiB  refault     0 MiB  cache peak  2030 MiB  anon peak  1593 MiB  CPU %              throttled 90s
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+  spark_df  n=1 rep=3 cold   52.57s  disk read  2057 MiB  refault     0 MiB  cache peak  2073 MiB  anon peak  1526 MiB  CPU %              throttled 10s
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+  spark_df  n=1 rep=3 warm   49.20s  disk read     0 MiB  refault     0 MiB  cache peak  2076 MiB  anon peak  1547 MiB  CPU %              throttled 7s
+=== 2026-11-25 12:26:14  cluster with 2 worker(s), tier L ===
+ Network hadoop Creating 
+ Network hadoop Created 
+ Container master Creating 
+ Container master Created 
+ Container worker2 Creating 
+ Container worker1 Creating 
+ Container worker1 Created 
+ Container worker2 Created 
+ Container master Starting 
+ Container master Started 
+ Container worker2 Starting 
+ Container worker1 Starting 
+ Container worker2 Started 
+ Container worker1 Started 
+  ok: HDFS out of safe mode
+  ok: 2 live DataNodes
+  ok: 2 YARN NodeManagers
+cluster up: master + 2 worker(s)
+1.9 G  1.9 G  /input/L
+  HDFS data per worker (MiB): 1142;1173
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+  mr        n=2 rep=1 cold  106.51s  disk read  2013 MiB  refault     0 MiB  cache peak  1069 MiB  anon peak  1422 MiB  CPU % ;            throttled 295s
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+  mr        n=2 rep=1 warm  100.97s  disk read     0 MiB  refault     0 MiB  cache peak  1067 MiB  anon peak  1521 MiB  CPU % ;            throttled 279s
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+  spark_df  n=2 rep=1 cold   41.70s  disk read  2321 MiB  refault     0 MiB  cache peak  1517 MiB  anon peak  1479 MiB  CPU % ;            throttled 34s
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+  spark_df  n=2 rep=1 warm   33.74s  disk read     0 MiB  refault     0 MiB  cache peak  1520 MiB  anon peak  1434 MiB  CPU % ;            throttled 15s
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+  mr        n=2 rep=2 cold   80.96s  disk read  2012 MiB  refault     0 MiB  cache peak  1066 MiB  anon peak  1459 MiB  CPU % ;            throttled 205s
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+  mr        n=2 rep=2 warm   98.74s  disk read     0 MiB  refault     0 MiB  cache peak  1069 MiB  anon peak  1480 MiB  CPU % ;            throttled 317s
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+  spark_df  n=2 rep=2 cold   36.00s  disk read  2119 MiB  refault     0 MiB  cache peak  1128 MiB  anon peak  1433 MiB  CPU % ;            throttled 14s
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+  spark_df  n=2 rep=2 warm   33.04s  disk read     4 MiB  refault     0 MiB  cache peak  1135 MiB  anon peak  1437 MiB  CPU % ;            throttled 13s
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+  mr        n=2 rep=3 cold   95.84s  disk read  2011 MiB  refault     0 MiB  cache peak  1087 MiB  anon peak  1563 MiB  CPU % ;            throttled 261s
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+  mr        n=2 rep=3 warm   96.73s  disk read     0 MiB  refault     0 MiB  cache peak  1091 MiB  anon peak  1503 MiB  CPU % ;            throttled 322s
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+  spark_df  n=2 rep=3 cold   35.37s  disk read  2119 MiB  refault     0 MiB  cache peak  1128 MiB  anon peak  1668 MiB  CPU % ;            throttled 12s
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+  spark_df  n=2 rep=3 warm   32.57s  disk read     4 MiB  refault     0 MiB  cache peak  1137 MiB  anon peak  1975 MiB  CPU % ;            throttled 12s
+=== 2026-11-25 12:44:52  cluster with 3 worker(s), tier L ===
+ Network hadoop Creating 
+ Network hadoop Created 
+ Container master Creating 
+ Container master Created 
+ Container worker3 Creating 
+ Container worker2 Creating 
+ Container worker1 Creating 
+ Container worker3 Created 
+ Container worker2 Created 
+ Container worker1 Created 
+ Container master Starting 
+ Container master Started 
+ Container worker3 Starting 
+ Container worker2 Starting 
+ Container worker1 Starting 
+ Container worker3 Started 
+ Container worker2 Started 
+ Container worker1 Started 
+  ok: HDFS out of safe mode
+  ok: 3 live DataNodes
+  ok: 3 YARN NodeManagers
+cluster up: master + 3 worker(s)
+1.9 G  1.9 G  /input/L
+  HDFS data per worker (MiB): 1145;667;504
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+  mr        n=3 rep=1 cold   84.73s  disk read  2013 MiB  refault     0 MiB  cache peak  1057 MiB  anon peak  1582 MiB  CPU % ;;           throttled 468s
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+  mr        n=3 rep=1 warm   77.82s  disk read     0 MiB  refault     0 MiB  cache peak  1059 MiB  anon peak  1560 MiB  CPU % ;;           throttled 376s
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+  spark_df  n=3 rep=1 cold   39.76s  disk read  2317 MiB  refault     0 MiB  cache peak  1486 MiB  anon peak  1483 MiB  CPU % ;;           throttled 40s
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+  spark_df  n=3 rep=1 warm   31.58s  disk read     0 MiB  refault     0 MiB  cache peak  1488 MiB  anon peak  1593 MiB  CPU % ;;           throttled 16s
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+  mr        n=3 rep=2 cold   83.40s  disk read  2012 MiB  refault     0 MiB  cache peak  1057 MiB  anon peak  1577 MiB  CPU % ;;           throttled 428s
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+  mr        n=3 rep=2 warm   80.21s  disk read     0 MiB  refault     0 MiB  cache peak  1058 MiB  anon peak  1653 MiB  CPU % ;;           throttled 411s
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+  spark_df  n=3 rep=2 cold   36.61s  disk read  2177 MiB  refault     0 MiB  cache peak  1121 MiB  anon peak  1789 MiB  CPU % ;;           throttled 17s
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+  spark_df  n=3 rep=2 warm   34.13s  disk read     4 MiB  refault     0 MiB  cache peak  1126 MiB  anon peak  1461 MiB  CPU % ;;           throttled 21s
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+  mr        n=3 rep=3 cold   74.98s  disk read  2012 MiB  refault     0 MiB  cache peak  1058 MiB  anon peak  1627 MiB  CPU % ;;           throttled 384s
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+  mr        n=3 rep=3 warm   75.04s  disk read     0 MiB  refault     0 MiB  cache peak  1059 MiB  anon peak  1623 MiB  CPU % ;;           throttled 349s
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+  spark_df  n=3 rep=3 cold   34.52s  disk read  2177 MiB  refault     0 MiB  cache peak  1124 MiB  anon peak  1638 MiB  CPU % ;;           throttled 17s
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+  spark_df  n=3 rep=3 warm   38.23s  disk read     4 MiB  refault     0 MiB  cache peak  1125 MiB  anon peak  1648 MiB  CPU % ;;           throttled 21s
+=== 2026-11-25 13:01:32  cluster with 4 worker(s), tier L ===
+ Network hadoop Creating 
+ Network hadoop Created 
+ Container master Creating 
+ Container master Created 
+ Container worker4 Creating 
+ Container worker2 Creating 
+ Container worker3 Creating 
+ Container worker1 Creating 
+ Container worker1 Created 
+ Container worker3 Created 
+ Container worker2 Created 
+ Container worker4 Created 
+ Container master Starting 
+ Container master Started 
+ Container worker4 Starting 
+ Container worker1 Starting 
+ Container worker3 Starting 
+ Container worker2 Starting 
+ Container worker4 Started 
+ Container worker1 Started 
+ Container worker3 Started 
+ Container worker2 Started 
+  ok: HDFS out of safe mode
+  ok: 4 live DataNodes
+  ok: 4 YARN NodeManagers
+cluster up: master + 4 worker(s)
+1.9 G  1.9 G  /input/L
+  HDFS data per worker (MiB): 322;360;733;901
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+  mr        n=4 rep=1 cold   74.59s  disk read  2014 MiB  refault     0 MiB  cache peak   820 MiB  anon peak  1459 MiB  CPU % ;;;          throttled 507s
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+  mr        n=4 rep=1 warm   74.58s  disk read     0 MiB  refault     0 MiB  cache peak   821 MiB  anon peak  1510 MiB  CPU % ;;;          throttled 491s
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+  spark_df  n=4 rep=1 cold   41.67s  disk read  2317 MiB  refault     0 MiB  cache peak  1236 MiB  anon peak  1523 MiB  CPU % ;;;          throttled 75s
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+  spark_df  n=4 rep=1 warm   35.02s  disk read     0 MiB  refault     0 MiB  cache peak  1240 MiB  anon peak  1479 MiB  CPU % ;;;          throttled 26s
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+  mr        n=4 rep=2 cold   76.89s  disk read  2012 MiB  refault     0 MiB  cache peak   821 MiB  anon peak  1620 MiB  CPU % ;;;          throttled 525s
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+  mr        n=4 rep=2 warm   76.33s  disk read     0 MiB  refault     0 MiB  cache peak   821 MiB  anon peak  1503 MiB  CPU % ;;;          throttled 511s
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+  spark_df  n=4 rep=2 cold   39.70s  disk read  2238 MiB  refault     0 MiB  cache peak   884 MiB  anon peak  1507 MiB  CPU % ;;;          throttled 29s
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+  spark_df  n=4 rep=2 warm   34.83s  disk read     4 MiB  refault     0 MiB  cache peak   887 MiB  anon peak  1781 MiB  CPU % ;;;          throttled 28s
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+  mr        n=4 rep=3 cold   76.90s  disk read  2012 MiB  refault     0 MiB  cache peak   822 MiB  anon peak  1599 MiB  CPU % ;;;          throttled 518s
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+  mr        n=4 rep=3 warm   70.36s  disk read     0 MiB  refault     0 MiB  cache peak   821 MiB  anon peak  1538 MiB  CPU % ;;;          throttled 476s
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+  spark_df  n=4 rep=3 cold   36.33s  disk read  2238 MiB  refault     0 MiB  cache peak   886 MiB  anon peak  1543 MiB  CPU % ;;;          throttled 24s
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+awk: cmd. line:1: BEGIN { printf "%.0f", s > 0 ? c / 1e6 / (2 * s) * 100 : 0 }
+awk: cmd. line:1:                              ^ syntax error
+  spark_df  n=4 rep=3 warm   34.19s  disk read     0 MiB  refault     0 MiB  cache peak   887 MiB  anon peak  1742 MiB  CPU % ;;;          throttled 30s
+=== 2026-11-25 13:18:50  cache experiment finished; results in <repo>/results/cache/cache_runs.csv

@@ -1,0 +1,32 @@
+hour,trips
+0,75241
+1,50480
+2,34960
+3,22942
+4,15275
+5,17493
+6,39413
+7,80850
+8,113478
+9,125600
+10,135403
+11,146729
+12,159892
+13,165334
+14,178007
+15,183974
+16,184952
+17,200286
+18,206264
+19,178788
+20,155544
+21,155894
+22,138232
+23,104626
+
+rank,zone,hour,trips
+1,Midtown Center (Manhattan),18,13599
+2,Midtown Center (Manhattan),17,12905
+3,Upper East Side North (Manhattan),15,11848
+4,Upper East Side South (Manhattan),14,11696
+5,Midtown Center (Manhattan),19,11511

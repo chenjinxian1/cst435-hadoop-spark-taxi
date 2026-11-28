@@ -4,6 +4,7 @@
 % Limit:  the report must not exceed 10 pages (appendix with source code is
 %         kept separate; confirm with the lecturer whether it counts).
 \documentclass[conference,a4paper]{IEEEtran}
+\ifdefined\pdfsuppressptexinfo\pdfsuppressptexinfo=-1\fi   % do not embed local file paths of included figures
 
 \usepackage[T1]{fontenc}
 \usepackage{graphicx}
@@ -56,9 +57,15 @@
 
 \title{Scaling Urban Mobility Analytics with Hadoop MapReduce and Spark on a Containerised Cluster}
 
+% Public build: names only. The submission copy with student IDs is built locally from
+% private/authors.tex by a local wrapper that defines \withids (neither is in the repository).
+\ifdefined\withids
+\input{private/authors.tex}
+\else
 \author{\IEEEauthorblockN{Chen Jinxian, Yang Ye, Gong Pengxiang, Ma Jiajun}
 \IEEEauthorblockA{School of Computer Sciences, Universiti Sains Malaysia\\
 CST435 Parallel and Cloud Computing, Semester 1, 2026/2027 --- Assignment 2}}
+\fi
 
 \maketitle
 \thispagestyle{plain}\pagestyle{plain}   % page numbers (IEEEtran conference mode hides them)

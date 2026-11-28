@@ -11,3 +11,7 @@ report/*.fdb_latexmk
 report/*.synctex.gz
 __pycache__/
 CST435_Assignment2_source.zip
+report/private/
+report/main_submission.pdf
+report/main_submission.*
+video/
